@@ -9,7 +9,7 @@
 ## 项目结构
 
 ```
-hohoyu-skill/
+strategic-marketing-director/
 ├── SKILL.md                    # 主技能文件（战略营销总监核心内容）
 ├── references/                 # 参考模型库
 │   ├── strategic-models.md     # 战略分析模型（五力/SWOT/PESTEL/BCG等）
