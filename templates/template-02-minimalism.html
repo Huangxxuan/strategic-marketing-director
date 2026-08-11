@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<!--
+==================================================================
+  template-02-minimalism.html
+  风格: 极简主义 (Minimalism)  |  12 视觉风格 2/12
+  归属: strategic-marketing-director v2.0.0 · 输出交付模板
+  原则: 大量留白 + 少元素 + 低饱和灰阶 + 细无衬线 + 缓慢淡入 + 呼吸感
+  技术栈: 原生 HTML/CSS/JS,零依赖,单文件,响应式 + 打印适配
+  协议: MIT,随 skill 开源分发
+
+  【使用说明】
+  1. 用途:营销战略方案的可视化交付载体(html 报告 + ppt deck 二合一)
+  2. 替换下方"占位符清单"中的各占位符为你的内容;示例内容为薇诺娜 Q4 大促 demo
+  3. 标记为 [SECTION: XX] 的 HTML 注释块为可变区域,替换整段为你的内容
+  4. 交互:← / -> 翻页,空格下一页,Home/End 首尾页,P 打印/导出 PDF
+  5. 本地预览: 直接浏览器打开本文件(零依赖,无需服务器)
+
+  【占位符清单】(与 12 模板统一 schema)
+  | 占位符                  | 说明                | 必填 | 示例值(薇诺娜)            |
+  |-------------------------|---------------------|------|---------------------------|
+  | {{TITLE}}               | 品牌/项目名         | 是   | 薇诺娜                    |
+  | {{SUBTITLE}}            | 方案主旨一句话      | 是   | 敏感肌专研心智...         |
+  | {{SCENARIO}}            | 方案场景            | 是   | Q4 大促 GTM 方案          |
+  | {{CONCLUSION}}          | 核心结论(一句话)    | 是   | 以"敏感肌专研"...         |
+  | {{FRAMEWORKS}}          | 调用框架标注        | 是   | 框架3 营销组合 + 框架4... |
+  | {{METRIC_1_NUM/LABEL}}  | 复盘指标1 数值/名称  | 是   | ≥3 / LTV·CAC              |
+  | {{METRIC_2_NUM/LABEL}}  | 复盘指标2 数值/名称  | 是   | +40% / AIPL 蓄水          |
+  | {{METRIC_3_NUM/LABEL}}  | 复盘指标3 数值/名称  | 是   | +15% / 复购率             |
+  | {{METRIC_4_NUM/LABEL}}  | 复盘指标4 数值/名称  | 是   | ≥50 / NPS 净推荐值        |
+
+  【可变区域(HTML 注释标记,替换整段)】
+  · STP 定位分析    -> 搜索  SECTION: STP
+  · 4P 组合分析     -> 搜索  SECTION: 4P
+  · POES 渠道组合   -> 搜索  SECTION: POES
+  · 增长路径        -> 搜索  SECTION: GROWTH
+  · 行动建议表格行  -> 搜索  SECTION: ACTIONS
+  · 风险预案条目    -> 搜索  SECTION: RISKS
+
+  【结构】8 slides: 封面 / 目录 / 核心结论 / STP+4P / POES+增长 / 行动建议 / 风险预案 / 复盘指标
+==================================================================
+-->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{{TITLE}} · 极简主义方案模板</title>
+<style>
+/* ================================================================
+   设计系统 Token - 极简主义
+   核心:留白做层级,灰阶做区分,细字重做气质,缓慢动效做呼吸
+   ================================================================ */
+:root{
+  /* 低饱和灰阶:无彩色,靠明度分层 */
+  --c-bg: #FAFAFA;
+  --c-surface: #FFFFFF;
+  --c-text: #1A1A1A;
+  --c-text-soft: #555555;
+  --c-muted: #A0A0A0;
+  --c-line: #EAEAEA;
+  --c-accent: #FFD60A;        /* 柠檬黄 品牌强调色 */
+  --c-accent-ink: #1A1A1A;    /* 黄底黑字 */
+
+  /* 细无衬线 */
+  --font-sans: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-mono: "SF Mono", Menlo, Consolas, monospace;
+
+  /* 间距:大留白(比现代主义更宽松) */
+  --s-1: 8px;  --s-2: 16px; --s-3: 32px; --s-4: 48px;
+  --s-5: 64px; --s-6: 96px; --s-7: 144px;
+
+  /* 圆角:0(极简直角) */
+  --r: 0;
+  /* 阴影:无 */
+  --shadow: none;
+
+  /* 网格:12 列,大间距 */
+  --grid-cols: 12;
+  --grid-gap: 48px;
+  --max-width: 960px;
+}
+
+/* ================================================================
+   Reset
+   ================================================================ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;scroll-behavior:smooth}
+body{
+  font-family:var(--font-sans);
+  font-weight:300;
+  color:var(--c-text);
+  background:var(--c-bg);
+  line-height:1.7;
+  letter-spacing:0.01em;
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ================================================================
+   Deck 翻页系统
+   ================================================================ */
+.deck{position:relative}
+.slide{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:var(--s-6) var(--s-5);
+  border-bottom:1px solid var(--c-line);
+  background:var(--c-surface);
+  position:relative;
+}
+
+/* 翻页控制(极简:透明底,细边) */
+.nav{
+  position:fixed;bottom:var(--s-3);right:var(--s-3);
+  display:flex;gap:var(--s-1);z-index:100;
+}
+.nav button{
+  width:40px;height:40px;
+  border:1px solid var(--c-line);
+  background:transparent;
+  color:var(--c-text);
+  font-size:16px;
+  cursor:pointer;
+  border-radius:var(--r);
+  transition:all .4s ease;
+}
+.nav button:hover{border-color:var(--c-accent);background:var(--c-accent);color:var(--c-accent-ink)}
+.nav button:focus-visible{outline:1px solid var(--c-text);outline-offset:2px}
+
+/* 进度条:极细线 */
+.progress{
+  position:fixed;top:0;left:0;
+  height:2px;background:var(--c-accent);
+  z-index:101;transition:width .6s ease;
+}
+
+/* 页码:细字 */
+.pager{
+  position:fixed;bottom:var(--s-3);left:var(--s-3);
+  font-family:var(--font-mono);
+  font-size:11px;font-weight:300;
+  color:var(--c-muted);
+  letter-spacing:2px;
+  z-index:100;
+}
+
+/* ================================================================
+   排版(细字重 + 宽字距 + 大留白)
+   ================================================================ */
+.eyebrow{
+  font-size:11px;font-weight:400;
+  letter-spacing:4px;text-transform:uppercase;
+  color:var(--c-muted);
+  margin-bottom:var(--s-3);
+}
+h1{font-size:clamp(32px,5vw,56px);font-weight:300;line-height:1.2;letter-spacing:-0.02em}
+h2{font-size:clamp(24px,3.5vw,40px);font-weight:300;line-height:1.3;letter-spacing:-0.01em;margin-bottom:var(--s-4)}
+h3{font-size:18px;font-weight:400;line-height:1.4;margin-bottom:var(--s-2);color:var(--c-text)}
+p{font-size:15px;color:var(--c-text-soft);line-height:1.8;max-width:60ch;font-weight:300}
+.lead{font-size:clamp(17px,2vw,20px);color:var(--c-text-soft);line-height:1.7;max-width:55ch;font-weight:300}
+strong,b{font-weight:600;color:var(--c-text)}
+
+/* ================================================================
+   12 列网格系统
+   ================================================================ */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(var(--grid-cols),1fr);
+  gap:var(--grid-gap);
+  align-items:start;
+  width:100%;max-width:var(--max-width);
+  margin:0 auto;
+}
+.col-12{grid-column:span 12}
+.col-8{grid-column:span 8}
+.col-6{grid-column:span 6}
+.col-4{grid-column:span 4}
+.col-3{grid-column:span 3}
+
+/* ================================================================
+   组件(极简:无填充,靠留白与细线)
+   ================================================================ */
+.tag{
+  display:inline-block;
+  padding:6px 14px;
+  font-size:10px;font-weight:600;letter-spacing:3px;text-transform:uppercase;
+  background:var(--c-accent);
+  border-radius:var(--r);
+  color:var(--c-accent-ink);
+}
+
+.model-ref{
+  font-family:var(--font-mono);
+  font-size:11px;font-weight:300;
+  color:var(--c-muted);
+  letter-spacing:1px;
+  margin-bottom:var(--s-3);
+}
+
+/* 表格:无背景,仅细底线 */
+.table{width:100%;border-collapse:collapse;font-size:14px;font-weight:300}
+.table th{
+  color:var(--c-muted);
+  padding:var(--s-2) 0;text-align:left;font-weight:400;
+  letter-spacing:2px;text-transform:uppercase;font-size:10px;
+  border-bottom:1px solid var(--c-text);
+}
+.table td{padding:var(--s-3) 0;border-bottom:1px solid var(--c-line);vertical-align:top;color:var(--c-text-soft)}
+.table .p0{color:var(--c-text);font-weight:600}
+.table .p1{color:var(--c-muted);font-weight:400}
+
+/* 指标卡片:无边框,大数字细字重 */
+.metric{padding:var(--s-3) 0}
+.metric__num{font-size:40px;font-weight:700;color:var(--c-text);line-height:1;letter-spacing:-0.02em;display:inline-block;border-bottom:4px solid var(--c-accent);padding-bottom:10px}
+.metric__label{font-size:11px;color:var(--c-muted);letter-spacing:2px;text-transform:uppercase;margin-top:var(--s-2);font-weight:400}
+
+/* 风险预案:细线分隔 */
+.risk-item{
+  display:grid;grid-template-columns:1fr 1fr;gap:var(--s-4);
+  padding:var(--s-3) 0;border-bottom:1px solid var(--c-line);
+}
+.risk-item__r{font-weight:400;color:var(--c-text);font-size:15px}
+.risk-item__p{color:var(--c-text-soft);font-size:14px;font-weight:300}
+
+/* ================================================================
+   页面类型
+   ================================================================ */
+/* 封面:大留白,左对齐,无装饰 */
+.slide--cover{justify-content:center}
+
+/* 目录 */
+.toc-item{
+  display:flex;align-items:baseline;gap:var(--s-3);
+  padding:var(--s-3) 0;border-bottom:1px solid var(--c-line);
+}
+.toc-item__num{font-family:var(--font-mono);background:var(--c-accent);color:var(--c-accent-ink);font-weight:600;font-size:11px;min-width:36px;text-align:center;padding:5px 0;letter-spacing:1px}
+.toc-list{display:grid;grid-template-columns:1fr 1fr;gap:0 var(--s-6)}
+
+/* 核心结论:大字,留白,无背景框 */
+.conclusion-box{
+  padding:var(--s-5) 0;
+  margin-top:var(--s-4);
+}
+.conclusion-box p{font-size:clamp(22px,3vw,32px);font-weight:400;color:var(--c-text);line-height:1.5;max-width:30ch}
+.conclusion-box strong{background:var(--c-accent);color:var(--c-accent-ink);padding:0 8px;font-weight:600}
+
+/* 分析段 */
+.analysis-item{padding:var(--s-3) 0}
+.analysis-item:last-child{border-bottom:none}
+
+/* ================================================================
+   动效:缓慢淡入,呼吸感(极简主义核心)
+   ================================================================ */
+.slide{opacity:0;transform:translateY(24px);transition:opacity .8s ease,transform .8s ease}
+.slide.seen{opacity:1;transform:translateY(0)}
+.metric__num,.table tr,.toc-item{transition:opacity .4s ease}
+
+/* ================================================================
+   响应式
+   ================================================================ */
+@media (max-width:768px){
+  :root{--grid-cols:6;--grid-gap:24px}
+  .col-8,.col-6,.col-4,.col-3{grid-column:span 6}
+  .slide{padding:var(--s-5) var(--s-3)}
+  .risk-item{grid-template-columns:1fr}
+  p{font-size:14px}
+  .metric__num{font-size:32px}
+  .table{font-size:13px}
+  .conclusion-box p{font-size:20px}
+}
+
+/* ================================================================
+   打印 / PPT 导出(每 slide 一页)
+   ================================================================ */
+@media print{
+  .nav,.pager,.progress{display:none}
+  .slide{min-height:100vh;page-break-after:always;opacity:1;transform:none;border:none}
+  body{background:var(--c-surface)}
+}
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress" style="width:0"></div>
+
+<div class="pager" id="pager">--</div>
+
+<div class="nav">
+  <button id="prev" aria-label="上一页">←</button>
+  <button id="next" aria-label="下一页">-></button>
+</div>
+
+<main class="deck" id="deck">
+
+  <!-- ============ 1. 封面 ============ -->
+  <section class="slide slide--cover seen">
+    <div class="grid">
+      <div class="col-12">
+        <span class="tag">极简主义 · Minimalism</span>
+      </div>
+      <div class="col-8" style="margin-top:96px">
+        <div class="eyebrow">营销战略方案 / Marketing Strategy</div>
+        <h1>{{TITLE}}<br>{{SCENARIO}}</h1>
+        <p class="lead" style="margin-top:48px">{{SUBTITLE}}</p>
+        <div style="margin-top:64px;font-family:var(--font-mono);font-size:11px;color:var(--c-muted);letter-spacing:2px">STRATEGIC MARKETING DIRECTOR v2.0.0</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 2. 目录 ============ -->
+  <section class="slide">
+    <div class="grid">
+      <div class="col-12">
+        <div class="eyebrow">目录 / Contents</div>
+        <h2>方案结构</h2>
+      </div>
+      <div class="col-12">
+        <div class="toc-list">
+          <div class="toc-item"><span class="toc-item__num">01</span><span>核心结论</span></div>
+          <div class="toc-item"><span class="toc-item__num">02</span><span>STP 市场定位</span></div>
+          <div class="toc-item"><span class="toc-item__num">03</span><span>4P 营销组合</span></div>
+          <div class="toc-item"><span class="toc-item__num">04</span><span>POES 渠道组合</span></div>
+          <div class="toc-item"><span class="toc-item__num">05</span><span>增长路径(AARRR + 飞轮)</span></div>
+          <div class="toc-item"><span class="toc-item__num">06</span><span>行动建议(P0 / P1)</span></div>
+          <div class="toc-item"><span class="toc-item__num">07</span><span>风险预案</span></div>
+          <div class="toc-item"><span class="toc-item__num">08</span><span>复盘指标</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 3. 核心结论 ============ -->
+  <section class="slide">
+    <div class="grid">
+      <div class="col-12">
+        <div class="eyebrow">01 / 核心结论</div>
+        <h2>核心结论</h2>
+      </div>
+      <div class="col-8">
+        <div class="conclusion-box">
+          <p>{{CONCLUSION}}</p>
+        </div>
+        <div class="model-ref">调用框架:{{FRAMEWORKS}}</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4. STP + 4P 分析 ============ -->
+  <section class="slide">
+    <div class="grid">
+      <div class="col-12">
+        <div class="eyebrow">02-03 / 分析过程</div>
+        <h2>STP 定位 + 4P 组合</h2>
+      </div>
+      <div class="col-6">
+        <div class="model-ref">框架3 · STP(市场细分->目标->定位)</div>
+        <!-- SECTION: STP (示例:薇诺娜,替换为你的 STP 定位分析) -->
+        <div class="analysis-item">
+          <h3>STP 定位</h3>
+          <p>细分:敏感肌修护/抗老/美白/防晒四型。聚焦 P0 修护型(18-35 女)+ P1 抗老型(28-40 女)。定位"皮肤学级敏感肌功效护肤,云南植物成分+临床验证"。</p>
+        </div>
+      </div>
+      <div class="col-6">
+        <div class="model-ref">框架3 · 4P(产品/价格/渠道/促销)</div>
+        <!-- SECTION: 4P (示例:薇诺娜,替换为你的 4P 组合分析) -->
+        <div class="analysis-item">
+          <h3>4P 组合</h3>
+          <p>产品:爆款+抗老新品+礼盒三矩阵。价格:正价锚定+赠品替代折扣+会员专享。渠道:天猫+抖音双主场。促销:内容种草+专业背书+礼盒,非纯折扣。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 5. POES 渠道 + 增长 ============ -->
+  <section class="slide">
+    <div class="grid">
+      <div class="col-12">
+        <div class="eyebrow">04-05 / 分析过程</div>
+        <h2>POES 渠道 + 增长路径</h2>
+      </div>
+      <div class="col-6">
+        <div class="model-ref">框架6 · POES 12 渠道</div>
+        <!-- SECTION: POES (示例:薇诺娜,替换为你的 POES 渠道组合) -->
+        <h3>渠道组合</h3>
+        <p>P 付费(信息流 30%+SEM 10%+KOL 20%)+ O 自有(私域 15%+小程序 5%)+ E 赢得(PR 5%+UGC 2%)+ S 共享(社媒 10%)。协同:Paid 引流 -> Owned 承接 -> Earned 放大 -> Shared 裂变。</p>
+      </div>
+      <div class="col-6">
+        <div class="model-ref">框架4 · AARRR + 飞轮</div>
+        <!-- SECTION: GROWTH (示例:薇诺娜,替换为你的增长路径) -->
+        <h3>增长路径</h3>
+        <p>北极星=有效护肤方案交付数。AARRR:蓄水->预售->爆发->复购->裂变。飞轮:内容种草 -> AIPL 蓄水 -> 大促转化 -> 私域沉淀 -> 复购提升 -> 数据反哺。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 6. 行动建议 ============ -->
+  <section class="slide">
+    <div class="grid">
+      <div class="col-12">
+        <div class="eyebrow">06 / 行动建议</div>
+        <h2>行动建议(P0 / P1)</h2>
+      </div>
+      <!-- SECTION: ACTIONS (示例:薇诺娜,替换 <tr> 行为你的行动建议) -->
+      <div class="col-12">
+        <table class="table">
+          <thead>
+            <tr><th style="width:80px">优先级</th><th>行动项</th><th style="width:140px">负责人</th><th style="width:120px">时间</th><th>预期效果</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="p0">P0</td><td>9 月内容种草蓄水,KOL 矩阵铺 30 个</td><td>品牌部</td><td>9 月</td><td>AIPL 蓄水 +40%</td></tr>
+            <tr><td class="p0">P0</td><td>私域会员分层运营,复购券精准触达</td><td>用户增长</td><td>10 月</td><td>复购率 +15%</td></tr>
+            <tr><td class="p1">P1</td><td>抗老新品礼盒上市,双主场首发</td><td>产品部</td><td>10 月</td><td>新品 GMV 占比 20%</td></tr>
+            <tr><td class="p1">P1</td><td>A/B 测试 4 组素材+落地页</td><td>投放</td><td>9-11 月</td><td>CTR +25%</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 7. 风险预案 ============ -->
+  <section class="slide">
+    <div class="grid">
+      <div class="col-12">
+        <div class="eyebrow">07 / 风险与预案</div>
+        <h2>风险预案</h2>
+      </div>
+      <!-- SECTION: RISKS (示例:薇诺娜,替换 risk-item 为你的风险预案) -->
+      <div class="col-8">
+        <div class="risk-item">
+          <div class="risk-item__r">风险:竞品低价冲击</div>
+          <div class="risk-item__p">预案:坚守正价锚定,赠品+专业背书强化价值感,不打价格战</div>
+        </div>
+        <div class="risk-item">
+          <div class="risk-item__r">风险:流量成本上涨</div>
+          <div class="risk-item__p">预案:私域承接比例提至 30%,内容种草降获客成本</div>
+        </div>
+        <div class="risk-item">
+          <div class="risk-item__r">风险:新品动销不及预期</div>
+          <div class="risk-item__p">预案:预售测款,A/B 验证卖点,滞销转赠品组合</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 8. 复盘指标 ============ -->
+  <section class="slide">
+    <div class="grid">
+      <div class="col-12">
+        <div class="eyebrow">08 / 复盘指标</div>
+        <h2>复盘指标</h2>
+      </div>
+      <div class="col-3">
+        <div class="metric">
+          <div class="metric__num">{{METRIC_1_NUM}}</div>
+          <div class="metric__label">{{METRIC_1_LABEL}}</div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="metric">
+          <div class="metric__num">{{METRIC_2_NUM}}</div>
+          <div class="metric__label">{{METRIC_2_LABEL}}</div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="metric">
+          <div class="metric__num">{{METRIC_3_NUM}}</div>
+          <div class="metric__label">{{METRIC_3_LABEL}}</div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="metric">
+          <div class="metric__num">{{METRIC_4_NUM}}</div>
+          <div class="metric__label">{{METRIC_4_LABEL}}</div>
+        </div>
+      </div>
+      <div class="col-12" style="margin-top:64px">
+        <div class="model-ref">框架7 数据评估:LTV-CAC + RFM + AIPL + NPS + A/B 显著性 + PDCA 迭代</div>
+        <p style="margin-top:16px">验证通过后,PDCA 迭代:规模化有效实验,废弃无效,回到北极星校准。</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+/* ================================================================
+   Deck 翻页交互(缓慢优雅,呼吸感过渡)
+   ================================================================ */
+(function(){
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  let idx = 0;
+  const progress = document.getElementById('progress');
+  const pager = document.getElementById('pager');
+
+  function pad(n){return String(n).padStart(2,'0');}
+
+  function setActive(i){
+    idx = i;
+    slides[i].classList.add('seen');
+    progress.style.width = ((idx+1)/total*100) + '%';
+    pager.textContent = pad(idx+1) + ' / ' + pad(total);
+  }
+
+  setActive(0);
+
+  function go(n){
+    n = Math.max(0, Math.min(total - 1, n));
+    setActive(n);
+    slides[n].scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  document.getElementById('prev').addEventListener('click', ()=>go(idx-1));
+  document.getElementById('next').addEventListener('click', ()=>go(idx+1));
+
+  document.addEventListener('keydown', e=>{
+    if(e.key==='ArrowRight' || e.key===' '){e.preventDefault();go(idx+1);}
+    else if(e.key==='ArrowLeft'){e.preventDefault();go(idx-1);}
+    else if(e.key==='Home'){e.preventDefault();go(0);}
+    else if(e.key==='End'){e.preventDefault();go(total-1);}
+    else if(e.key==='p' || e.key==='P'){window.print();}
+  });
+
+  // 滚动同步:进入视口即标记可见(永久) + 更新页码
+  const io = new IntersectionObserver(entries=>{
+    entries.forEach(en=>{
+      if(en.isIntersecting){
+        en.target.classList.add('seen');
+        const i = Array.from(slides).indexOf(en.target);
+        if(i>=0 && i!==idx){setActive(i);}
+      }
+    });
+  },{threshold:0.3});
+  slides.forEach(s=>io.observe(s));
+})();
+</script>
+</body>
+</html>

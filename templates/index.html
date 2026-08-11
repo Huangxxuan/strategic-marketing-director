@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<!--
+==================================================================
+  index.html - strategic-marketing-director v2.0.0 模板总览
+  5 视觉风格 HTML 模板导航页(零依赖,MIT 开源)
+  点击卡片进入对应模板预览
+==================================================================
+-->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>strategic-marketing-director v2.0.0 · 5 视觉风格模板</title>
+<style>
+:root{
+  --c-bg:#FAFAFA; --c-surface:#FFFFFF; --c-ink:#1A1A1A;
+  --c-muted:#888; --c-line:#EAEAEA;
+  --font-sans:-apple-system,BlinkMacSystemFont,"Helvetica Neue","PingFang SC","Microsoft YaHei",sans-serif;
+  --font-serif:Georgia,"Times New Roman","Songti SC",serif;
+  --font-mono:"SF Mono",Menlo,Consolas,monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:var(--font-sans);
+  color:var(--c-ink);
+  background:var(--c-bg);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1200px;margin:0 auto;padding:64px 32px 96px}
+
+/* 头部 */
+.header{margin-bottom:64px;border-bottom:2px solid var(--c-ink);padding-bottom:32px}
+.header__eyebrow{font-size:12px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--c-muted);margin-bottom:12px}
+.header__title{font-size:clamp(32px,5vw,52px);font-weight:800;line-height:1.1;letter-spacing:-1px;margin-bottom:16px}
+.header__desc{font-size:16px;color:#555;max-width:70ch;line-height:1.7}
+.header__meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
+.header__chip{font-size:12px;font-weight:600;padding:4px 10px;background:var(--c-ink);color:#FFF;border-radius:3px;letter-spacing:0.5px}
+
+/* 卡片网格 */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px;margin-bottom:64px}
+.card{
+  background:var(--c-surface);
+  border:1px solid var(--c-line);
+  border-radius:8px;
+  padding:28px;
+  text-decoration:none;
+  color:inherit;
+  display:flex;flex-direction:column;
+  transition:transform .25s ease,box-shadow .25s ease;
+  position:relative;
+  overflow:hidden;
+}
+.card:hover{transform:translateY(-6px);box-shadow:0 16px 40px rgba(0,0,0,0.1)}
+.card__head{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
+.card__num{font-family:var(--font-mono);font-size:13px;font-weight:700;color:var(--c-muted);letter-spacing:1px}
+.card__tag{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:3px 8px;border-radius:3px}
+.card__name{font-size:26px;font-weight:800;line-height:1.15;margin-bottom:4px}
+.card__name-en{font-size:13px;color:var(--c-muted);letter-spacing:1px;margin-bottom:20px}
+
+/* 品牌色块 */
+.card__swatch{display:flex;gap:6px;margin-bottom:20px}
+.card__swatch span{width:36px;height:36px;border-radius:4px;display:block}
+.card__color{font-family:var(--font-mono);font-size:11px;color:var(--c-muted);margin-bottom:20px}
+
+/* 迷你风格预览 */
+.card__preview{
+  padding:20px;border-radius:6px;margin-bottom:20px;
+  min-height:96px;display:flex;flex-direction:column;justify-content:center;
+}
+
+/* 卡片底部 */
+.card__features{font-size:13px;color:#555;line-height:1.6;margin-bottom:20px;flex:1}
+.card__cta{font-size:13px;font-weight:700;display:flex;align-items:center;gap:6px;padding-top:16px;border-top:1px solid var(--c-line)}
+.card__cta::after{content:"→";transition:transform .2s ease}
+.card:hover .card__cta::after{transform:translateX(4px)}
+
+/* === 01 现代主义 === */
+.card--01 .card__tag{background:#DA1F26;color:#FFF}
+.card--01 .card__name{color:#0A0A0A}
+.card--01 .card__preview{background:#F4F4F4;border-left:6px solid #DA1F26}
+.card--01 .card__preview-title{font-size:18px;font-weight:700;color:#0A0A0A;text-transform:uppercase;letter-spacing:-0.5px}
+.card--01 .card__preview-sub{font-size:11px;color:#DA1F26;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-top:4px}
+
+/* === 02 极简主义 === */
+.card--02 .card__tag{background:#FFD60A;color:#1A1A1A}
+.card--02 .card__name{font-weight:300;color:#1A1A1A;letter-spacing:-0.5px}
+.card--02 .card__name-en{letter-spacing:3px}
+.card--02 .card__preview{background:#FAFAFA;border:1px solid #EAEAEA}
+.card--02 .card__preview-title{font-size:18px;font-weight:300;color:#1A1A1A;letter-spacing:1px}
+.card--02 .card__preview-sub{font-size:11px;color:#A0A0A0;font-weight:400;letter-spacing:3px;text-transform:uppercase;margin-top:6px}
+
+/* === 03 新野兽派 === */
+.card--03{border:3px solid #0A0A0A}
+.card--03 .card__tag{background:#FF3D7F;color:#0A0A0A;border:2px solid #0A0A0A}
+.card--03 .card__name{font-weight:900;color:#0A0A0A;text-transform:uppercase;letter-spacing:-1px}
+.card--03 .card__preview{background:#FF3D7F;border:3px solid #0A0A0A;box-shadow:5px 5px 0 #0A0A0A}
+.card--03 .card__preview-title{font-size:18px;font-weight:900;color:#0A0A0A;text-transform:uppercase;letter-spacing:-0.5px}
+.card--03 .card__preview-sub{font-size:11px;color:#0A0A0A;font-weight:800;letter-spacing:1px;margin-top:4px}
+
+/* === 04 像素风 === */
+.card--04{background:#0F0F0F;border:3px solid #39FF14}
+.card--04 .card__num{color:#5A8A5A}
+.card--04 .card__tag{background:#39FF14;color:#0F0F0F;font-family:var(--font-mono)}
+.card--04 .card__name{color:#39FF14;font-family:var(--font-mono);letter-spacing:1px}
+.card--04 .card__name-en{color:#5A8A5A;font-family:var(--font-mono)}
+.card--04 .card__color{color:#5A8A5A}
+.card--04 .card__preview{background:#1A1A1A;border:2px solid #39FF14}
+.card--04 .card__preview-title{font-size:16px;font-weight:700;color:#39FF14;font-family:var(--font-mono);letter-spacing:1px;text-transform:uppercase}
+.card--04 .card__preview-sub{font-size:11px;color:#00FFFF;font-family:var(--font-mono);margin-top:6px;letter-spacing:1px}
+.card--04 .card__features{color:#8A8A8A}
+.card--04 .card__cta{color:#39FF14;border-top-color:#2A4A2A}
+
+/* === 05 极繁主义 === */
+.card--05{border:none;background:linear-gradient(135deg,#FFF8F3,#FFF0F5)}
+.card--05 .card__tag{background:linear-gradient(135deg,#E91E63,#FF6B35);color:#FFF}
+.card--05 .card__name{font-family:var(--font-serif);background:linear-gradient(135deg,#880E4F,#E91E63,#FF6B35);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:700}
+.card--05 .card__name-en{color:#9B59B6;font-family:var(--font-serif)}
+.card--05 .card__preview{background:linear-gradient(135deg,#E91E63,#9B59B6);border-radius:10px}
+.card--05 .card__preview-title{font-family:var(--font-serif);font-size:18px;font-weight:700;color:#FFF}
+.card--05 .card__preview-sub{font-size:11px;color:#FFC107;font-weight:700;letter-spacing:1px;margin-top:4px}
+
+/* 底部规范 */
+.specs{background:var(--c-surface);border:1px solid var(--c-line);border-radius:8px;padding:32px}
+.specs__title{font-size:14px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--c-muted);margin-bottom:20px}
+.specs__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:20px}
+.specs__item h4{font-size:13px;font-weight:700;margin-bottom:6px}
+.specs__item p{font-size:13px;color:#555;line-height:1.6}
+
+.footer{margin-top:48px;padding-top:24px;border-top:1px solid var(--c-line);font-size:12px;color:var(--c-muted);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+
+@media (max-width:640px){
+  .wrap{padding:32px 20px 64px}
+  .grid{grid-template-columns:1fr}
+  .specs__grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="header">
+    <div class="header__eyebrow">strategic-marketing-director v2.0.0 · 输出交付模板库</div>
+    <h1 class="header__title">5 视觉风格 HTML 模板</h1>
+    <p class="header__desc">
+      营销战略方案的可视化交付载体（HTML 报告 + PPT deck 二合一）。5 套模板共享统一占位符与 8-slide 结构，仅视觉皮肤切换。零依赖单文件，MIT 开源，替换 <code style="background:#1A1A1A;color:#FFD60A;padding:2px 6px;border-radius:3px;font-family:var(--font-mono);font-size:13px">{{KEY}}</code> 即生成方案。
+    </p>
+    <div class="header__meta">
+      <span class="header__chip">8 slides</span>
+      <span class="header__chip">13 占位符</span>
+      <span class="header__chip">零依赖</span>
+      <span class="header__chip">响应式</span>
+      <span class="header__chip">打印适配</span>
+      <span class="header__chip">MIT</span>
+    </div>
+  </header>
+
+  <div class="grid">
+
+    <!-- 01 现代主义 -->
+    <a class="card card--01" href="template-01-modernism.html">
+      <div class="card__head">
+        <span class="card__num">01</span>
+        <span class="card__tag">专业/高端</span>
+      </div>
+      <div class="card__name">现代主义</div>
+      <div class="card__name-en">MODERNISM · 包豪斯</div>
+      <div class="card__swatch">
+        <span style="background:#DA1F26"></span>
+        <span style="background:#FFD500"></span>
+        <span style="background:#0047BB"></span>
+        <span style="background:#0A0A0A"></span>
+      </div>
+      <div class="card__color">#DA1F26 包豪斯红</div>
+      <div class="card__preview">
+        <div class="card__preview-title">几何 · 原色</div>
+        <div class="card__preview-sub">Bauhaus · 1923</div>
+      </div>
+      <div class="card__features">三原色+黑白灰，无衬线粗体，直角无阴影，网格理性，线性动效</div>
+      <div class="card__cta">查看模板</div>
+    </a>
+
+    <!-- 02 极简主义 -->
+    <a class="card card--02" href="template-02-minimalism.html">
+      <div class="card__head">
+        <span class="card__num">02</span>
+        <span class="card__tag">高端/专业</span>
+      </div>
+      <div class="card__name">极简主义</div>
+      <div class="card__name-en">M I N I M A L I S M</div>
+      <div class="card__swatch">
+        <span style="background:#FFD60A"></span>
+        <span style="background:#FAFAFA;border:1px solid #EAEAEA"></span>
+        <span style="background:#1A1A1A"></span>
+        <span style="background:#A0A0A0"></span>
+      </div>
+      <div class="card__color">#FFD60A 柠檬黄</div>
+      <div class="card__preview">
+        <div class="card__preview-title">少即是多</div>
+        <div class="card__preview-sub">L E S S   I S   M O R E</div>
+      </div>
+      <div class="card__features">大量留白，低饱和灰阶，细无衬线 weight 300，宽字距，缓慢淡入 0.8s</div>
+      <div class="card__cta">查看模板</div>
+    </a>
+
+    <!-- 03 新野兽派 -->
+    <a class="card card--03" href="template-03-brutalism.html">
+      <div class="card__head">
+        <span class="card__num">03</span>
+        <span class="card__tag">活力</span>
+      </div>
+      <div class="card__name">新野兽派</div>
+      <div class="card__name-en">NEO-BRUTALISM</div>
+      <div class="card__swatch">
+        <span style="background:#FF3D7F"></span>
+        <span style="background:#4361EE"></span>
+        <span style="background:#C6FF00"></span>
+        <span style="background:#0A0A0A"></span>
+      </div>
+      <div class="card__color">#FF3D7F 亮粉</div>
+      <div class="card__preview">
+        <div class="card__preview-title">BOLD RAW</div>
+        <div class="card__preview-sub">粗边 · 硬阴影</div>
+      </div>
+      <div class="card__features">粗黑边框 4px，硬阴影无模糊，多色撞色，粗体 900 大写，直角</div>
+      <div class="card__cta">查看模板</div>
+    </a>
+
+    <!-- 04 像素风 -->
+    <a class="card card--04" href="template-04-pixel-art.html">
+      <div class="card__head">
+        <span class="card__num">04</span>
+        <span class="card__tag">活力/科技</span>
+      </div>
+      <div class="card__name">像素风</div>
+      <div class="card__name-en">PIXEL ART</div>
+      <div class="card__swatch">
+        <span style="background:#39FF14"></span>
+        <span style="background:#00FFFF"></span>
+        <span style="background:#FF00FF"></span>
+        <span style="background:#0F0F0F"></span>
+      </div>
+      <div class="card__color">#39FF14 荧光绿</div>
+      <div class="card__preview">
+        <div class="card__preview-title">8-BIT MODE</div>
+        <div class="card__preview-sub">&gt; PRESS START</div>
+      </div>
+      <div class="card__features">深底荧光字，等宽像素字体，方块边框，8-bit 撞色，阶跃动效 steps</div>
+      <div class="card__cta">查看模板</div>
+    </a>
+
+    <!-- 05 极繁主义 -->
+    <a class="card card--05" href="template-05-maximalism.html">
+      <div class="card__head">
+        <span class="card__num">05</span>
+        <span class="card__tag">活力</span>
+      </div>
+      <div class="card__name">极繁主义</div>
+      <div class="card__name-en">Maximalism</div>
+      <div class="card__swatch">
+        <span style="background:#E91E63"></span>
+        <span style="background:#FF6B35"></span>
+        <span style="background:#9B59B6"></span>
+        <span style="background:#FFC107"></span>
+      </div>
+      <div class="card__color">#E91E63 玫红</div>
+      <div class="card__preview">
+        <div class="card__preview-title">More is More</div>
+        <div class="card__preview-sub">渐变 · 衬线 · 撞色</div>
+      </div>
+      <div class="card__features">多色渐变文字，衬线+无衬线混搭，图案底纹，彩色阴影，弹跳动效</div>
+      <div class="card__cta">查看模板</div>
+    </a>
+
+  </div>
+
+  <!-- 统一规范 -->
+  <section class="specs">
+    <h3 class="specs__title">统一规范 · 5 模板一致</h3>
+    <div class="specs__grid">
+      <div class="specs__item">
+        <h4>8 Slides 结构</h4>
+        <p>封面 / 目录 / 核心结论 / STP+4P / POES+增长 / 行动建议 / 风险预案 / 复盘指标</p>
+      </div>
+      <div class="specs__item">
+        <h4>13 占位符 Schema</h4>
+        <p>TITLE / SUBTITLE / SCENARIO / CONCLUSION / FRAMEWORKS / METRIC_1-4(NUM+LABEL)</p>
+      </div>
+      <div class="specs__item">
+        <h4>交互</h4>
+        <p>← → 翻页 · 空格下页 · Home/End 首尾 · P 打印 · 鼠标滚动同步</p>
+      </div>
+      <div class="specs__item">
+        <h4>技术</h4>
+        <p>零依赖单文件 · 响应式 768px 断点 · @media print 每页一 slide · MIT 开源</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <span>strategic-marketing-director v2.0.0 · 输出交付模板库</span>
+    <span>5/5 已交付 · MIT · 2026</span>
+  </footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<!--
+==================================================================
+  template-05-maximalism.html
+  风格: 极繁主义 (Maximalism)  |  12 视觉风格 5/12 (本系列最终版)
+  归属: strategic-marketing-director v2.0.0 · 输出交付模板
+  原则: More is more - 渐变文字 + 多色撞色 + 图案纹理 + 衬线混搭 + 彩色阴影 + 丰富动效
+  技术栈: 原生 HTML/CSS/JS,零依赖,单文件,响应式 + 打印适配
+  协议: MIT,随 skill 开源分发
+
+  【使用说明】
+  1. 用途:营销战略方案的可视化交付载体(html 报告 + ppt deck 二合一)
+  2. 替换下方"占位符清单"中的各占位符为你的内容;示例内容为薇诺娜 Q4 大促 demo
+  3. 标记为 [SECTION: XX] 的 HTML 注释块为可变区域,替换整段为你的内容
+  4. 交互:← / -> 翻页,空格下一页,Home/End 首尾页,P 打印/导出 PDF
+  5. 本地预览: 直接浏览器打开本文件(零依赖,无需服务器)
+
+  【占位符清单】(与 12 模板统一 schema)
+  | 占位符            | 说明          | 必填 | 示例值(薇诺娜)    |
+  |-------------------|---------------|------|--------------------|
+  | {{TITLE}}         | 品牌/项目名   | 是   | 薇诺娜             |
+  | {{SUBTITLE}}      | 方案主旨      | 是   | 敏感肌专研心智...  |
+  | {{SCENARIO}}      | 场景/副标题   | 是   | Q4 大促全案        |
+  | {{CONCLUSION}}    | 核心结论      | 是   | 双 11 GMV 目标...  |
+  | {{FRAMEWORKS}}    | 方法论模型内容| 是   | STP/4P/POES...     |
+  | {{METRIC_1_NUM}}  | 指标1数值     | 是   | 5.2亿              |
+  | {{METRIC_1_LABEL}}| 指标1标签     | 是   | GMV 目标           |
+  | {{METRIC_2_NUM}}  | 指标2数值     | 是   | 38%                |
+  | {{METRIC_2_LABEL}}| 指标2标签     | 是   | 同比增长           |
+  | {{METRIC_3_NUM}}  | 指标3数值     | 是   | 3.2                |
+  | {{METRIC_3_LABEL}}| 指标3标签     | 是   | ROI                |
+  | {{METRIC_4_NUM}}  | 指标4数值     | 是   | 65%                |
+  | {{METRIC_4_LABEL}}| 指标4标签     | 是   | 复购率             |
+
+  【结构】8 slides: 封面 / 目录 / 核心结论 / STP+4P / POES+增长 / 行动建议 / 风险预案 / 复盘指标
+==================================================================
+-->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{TITLE}} · 营销战略方案 · 极繁主义</title>
+<style>
+/* ================================================================
+   设计 Token(极繁主义:多色 + 渐变 + 图案 + 衬线混搭)
+   ================================================================ */
+:root{
+  /* 暖白底 + 玫红主色 + 多彩辅助 */
+  --c-bg: #FFF8F3;            /* 暖白底 */
+  --c-surface: #FFFFFF;
+  --c-ink: #2A1A2E;           /* 深紫黑文字 */
+  --c-accent: #E91E63;        /* 玫红 主强调 */
+  --c-deep: #880E4F;          /* 深玫红 */
+  --c-orange: #FF6B35;        /* 橙 */
+  --c-purple: #9B59B6;        /* 紫 */
+  --c-cyan: #00BCD4;          /* 青 */
+  --c-gold: #FFC107;          /* 金 */
+  --c-pink: #FF80AB;          /* 粉 */
+  --c-muted: #8A8A8A;
+  --c-line: #F0E0E8;
+
+  /* 字体:衬线标题(华丽) + 无衬线正文(清晰)混搭 */
+  --font-serif: Georgia, "Times New Roman", "Songti SC", "STSong", serif;
+  --font-sans: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --font-mono: "SF Mono", Menlo, Consolas, monospace;
+
+  /* 间距 */
+  --s-1: 8px; --s-2: 16px; --s-3: 24px; --s-4: 32px;
+  --s-5: 48px; --s-6: 64px; --s-7: 96px;
+
+  /* 圆角:轻圆角(极繁允许柔和) */
+  --r: 6px;
+  --r-lg: 16px;
+  /* 彩色阴影 */
+  --shadow: 6px 6px 0 var(--c-gold);
+  --shadow-soft: 0 8px 24px rgba(233,30,99,0.15);
+
+  /* 渐变 */
+  --grad-main: linear-gradient(135deg, var(--c-accent) 0%, var(--c-orange) 50%, var(--c-purple) 100%);
+  --grad-warm: linear-gradient(135deg, var(--c-accent), var(--c-gold));
+  --grad-cool: linear-gradient(135deg, var(--c-cyan), var(--c-purple));
+
+  --grid-cols: 12;
+  --grid-gap: 24px;
+  --max-width: 1200px;
+}
+
+/* ================================================================
+   Reset
+   ================================================================ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;scroll-behavior:smooth}
+body{
+  font-family:var(--font-sans);
+  color:var(--c-ink);
+  background:var(--c-bg);
+  font-weight:400;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  /* 极繁:全局图案底纹 */
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(233,30,99,0.04) 0%, transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(0,188,212,0.04) 0%, transparent 40%),
+    repeating-linear-gradient(45deg, transparent 0 20px, rgba(255,193,7,0.02) 20px 21px);
+  background-attachment:fixed;
+}
+
+/* ================================================================
+   Deck 翻页系统
+   ================================================================ */
+.deck{position:relative}
+.slide{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:var(--s-6) var(--s-5);
+  border-bottom:2px dashed var(--c-line);
+  background:transparent;
+  position:relative;
+  overflow:hidden;
+}
+/* 角落渐变色块装饰(极繁标志性) */
+.slide::before{
+  content:"";position:absolute;top:-80px;right:-80px;
+  width:280px;height:280px;border-radius:50%;
+  background:var(--grad-warm);
+  filter:blur(60px);opacity:0.25;
+  z-index:0;
+  animation:floatBlob 8s ease-in-out infinite;
+}
+.slide::after{
+  content:"";position:absolute;bottom:-60px;left:-60px;
+  width:220px;height:220px;border-radius:50%;
+  background:var(--grad-cool);
+  filter:blur(50px);opacity:0.2;
+  z-index:0;
+  animation:floatBlob 10s ease-in-out infinite reverse;
+}
+@keyframes floatBlob{
+  0%,100%{transform:translate(0,0) scale(1)}
+  50%{transform:translate(20px,-20px) scale(1.1)}
+}
+.slide > .grid,.slide > *{position:relative;z-index:1}
+
+/* 翻页控制(渐变 + hover 弹跳) */
+.nav{
+  position:fixed;bottom:var(--s-3);right:var(--s-3);
+  display:flex;gap:var(--s-1);z-index:100;
+}
+.nav button{
+  width:48px;height:48px;
+  border:none;
+  background:var(--grad-main);
+  color:#FFFFFF;
+  font-size:18px;font-weight:700;
+  cursor:pointer;
+  border-radius:var(--r);
+  box-shadow:var(--shadow-soft);
+  transition:transform .25s cubic-bezier(.34,1.56,.64,1),box-shadow .25s ease;
+}
+.nav button:hover{transform:translateY(-4px) scale(1.08);box-shadow:0 12px 28px rgba(233,30,99,0.3)}
+.nav button:active{transform:translateY(-1px) scale(1.02)}
+.nav button:focus-visible{outline:3px solid var(--c-purple);outline-offset:3px}
+
+/* 进度条:多色渐变 + 流动 */
+.progress{
+  position:fixed;top:0;left:0;
+  height:5px;
+  background:var(--grad-main);
+  background-size:200% 100%;
+  z-index:101;transition:width .4s ease;
+  animation:flowGrad 3s linear infinite;
+}
+@keyframes flowGrad{0%{background-position:0% 0}100%{background-position:200% 0}}
+
+/* 页码:渐变底 + 圆角 */
+.pager{
+  position:fixed;bottom:var(--s-3);left:var(--s-3);
+  font-family:var(--font-mono);
+  font-size:13px;font-weight:700;
+  color:#FFFFFF;
+  background:var(--grad-warm);
+  padding:8px 14px;
+  border-radius:var(--r);
+  box-shadow:var(--shadow-soft);
+  letter-spacing:1px;
+  z-index:100;
+}
+
+/* ================================================================
+   排版(衬线标题渐变 + 无衬线正文)
+   ================================================================ */
+.eyebrow{
+  display:inline-block;
+  font-size:12px;font-weight:700;
+  letter-spacing:3px;text-transform:uppercase;
+  color:#FFFFFF;
+  background:var(--grad-cool);
+  padding:6px 14px;
+  border-radius:var(--r);
+  margin-bottom:var(--s-3);
+  font-family:var(--font-sans);
+}
+h1{
+  font-family:var(--font-serif);
+  font-size:clamp(36px,6vw,68px);font-weight:700;line-height:1.1;letter-spacing:-1px;
+  background:var(--grad-main);
+  -webkit-background-clip:text;background-clip:text;
+  color:transparent;
+  padding-bottom:4px;
+}
+h2{
+  font-family:var(--font-serif);
+  font-size:clamp(30px,4.5vw,52px);font-weight:700;line-height:1.15;letter-spacing:-0.5px;
+  margin-bottom:var(--s-4);
+  background:linear-gradient(135deg,var(--c-deep),var(--c-accent),var(--c-orange));
+  -webkit-background-clip:text;background-clip:text;
+  color:transparent;
+}
+h3{
+  font-family:var(--font-serif);
+  font-size:22px;font-weight:700;line-height:1.3;margin-bottom:var(--s-2);
+  color:var(--c-deep);
+}
+p{font-size:16px;color:var(--c-ink);line-height:1.7;max-width:65ch;font-weight:400}
+.lead{font-size:clamp(18px,2vw,22px);color:var(--c-ink);line-height:1.6;max-width:60ch;font-weight:400;opacity:0.85}
+strong,b{font-weight:700;color:var(--c-accent)}
+
+/* ================================================================
+   12 列网格系统
+   ================================================================ */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(var(--grid-cols),1fr);
+  gap:var(--grid-gap);
+  align-items:start;
+  width:100%;max-width:var(--max-width);
+  margin:0 auto;
+}
+.col-12{grid-column:span 12}
+.col-8{grid-column:span 8}
+.col-6{grid-column:span 6}
+.col-4{grid-column:span 4}
+.col-3{grid-column:span 3}
+
+/* ================================================================
+   组件(多色 + 渐变 + 彩色阴影 + 图案)
+   ================================================================ */
+/* 标签:多色渐变 + 圆角 */
+.tag{
+  display:inline-block;
+  padding:8px 16px;
+  font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  background:var(--grad-main);
+  background-size:200% 100%;
+  color:#FFFFFF;
+  border-radius:var(--r);
+  box-shadow:var(--shadow-soft);
+  animation:flowGrad 4s linear infinite;
+}
+
+/* 模型标注:金底圆角 */
+.model-ref{
+  font-family:var(--font-mono);
+  font-size:12px;font-weight:700;
+  color:var(--c-ink);
+  background:var(--c-gold);
+  padding:5px 12px;
+  display:inline-block;
+  margin-bottom:var(--s-2);
+  border-radius:var(--r);
+  letter-spacing:1px;
+}
+
+/* 表格:圆角 + 彩色表头 + 条纹 */
+.table{width:100%;border-collapse:separate;border-spacing:0;font-size:14px;background:var(--c-surface);border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow-soft)}
+.table th{
+  background:var(--grad-main);
+  color:#FFFFFF;
+  padding:var(--s-2);text-align:left;font-weight:700;
+  letter-spacing:1px;text-transform:uppercase;font-size:12px;
+}
+.table td{padding:var(--s-2);border-bottom:1px solid var(--c-line);vertical-align:top;font-weight:400}
+.table tr:nth-child(even) td{background:rgba(233,30,99,0.03)}
+.table .p0{color:var(--c-accent);font-weight:700}
+.table .p1{color:var(--c-purple);font-weight:700}
+
+/* 指标卡片:4色渐变 + 彩色阴影 + hover 弹跳 */
+.metric{
+  padding:var(--s-3);
+  border-radius:var(--r-lg);
+  overflow:hidden;
+  word-break:break-word;
+  box-shadow:var(--shadow-soft);
+  transition:transform .3s cubic-bezier(.34,1.56,.64,1),box-shadow .3s ease;
+  position:relative;
+}
+.metric:hover{transform:translateY(-6px) scale(1.03);box-shadow:0 16px 36px rgba(233,30,99,0.25)}
+.metric--1{background:linear-gradient(135deg,var(--c-accent),var(--c-deep));color:#FFFFFF}
+.metric--2{background:linear-gradient(135deg,var(--c-orange),var(--c-gold));color:#FFFFFF}
+.metric--3{background:linear-gradient(135deg,var(--c-purple),var(--c-accent));color:#FFFFFF}
+.metric--4{background:linear-gradient(135deg,var(--c-cyan),var(--c-purple));color:#FFFFFF}
+.metric__num{font-family:var(--font-serif);font-size:clamp(28px,4vw,44px);font-weight:700;color:inherit;line-height:1;letter-spacing:-1px;overflow-wrap:anywhere;word-break:break-word;max-width:100%}
+.metric__label{font-size:11px;color:inherit;opacity:0.9;letter-spacing:2px;text-transform:uppercase;margin-top:var(--s-2);font-weight:700;overflow-wrap:anywhere;line-height:1.4}
+/* 装饰圆点 */
+.metric::after{content:"";position:absolute;top:12px;right:12px;width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,0.4)}
+
+/* 风险预案 */
+.risk-item{
+  display:grid;grid-template-columns:1fr 1fr;gap:var(--s-2);
+  padding:var(--s-2) 0;
+  border-bottom:2px dashed var(--c-line);
+}
+.risk-item__r{font-weight:700;color:var(--c-accent);font-size:16px;font-family:var(--font-serif)}
+.risk-item__p{color:var(--c-ink);font-size:14px;font-weight:400;opacity:0.8}
+
+/* ================================================================
+   页面类型
+   ================================================================ */
+/* 封面 */
+.slide--cover{justify-content:flex-start;padding-top:var(--s-7)}
+
+/* 目录:渐变序号 + 两栏 */
+.toc-item{
+  display:flex;align-items:center;gap:var(--s-2);
+  padding:var(--s-2) 0;
+  border-bottom:2px dashed var(--c-line);
+  transition:transform .2s ease;
+}
+.toc-item:hover{transform:translateX(8px)}
+.toc-item__num{
+  font-family:var(--font-serif);
+  background:var(--grad-warm);
+  color:#FFFFFF;
+  font-weight:700;font-size:14px;
+  min-width:40px;text-align:center;padding:6px 0;
+  border-radius:var(--r);
+  letter-spacing:1px;
+}
+.toc-list{display:grid;grid-template-columns:1fr 1fr;gap:0 var(--s-5)}
+
+/* 核心结论:渐变底 + 大圆角 + 装饰 */
+.conclusion-box{
+  border-radius:var(--r-lg);
+  padding:var(--s-4) var(--s-5);
+  background:var(--grad-main);
+  background-size:200% 100%;
+  color:#FFFFFF;
+  box-shadow:var(--shadow-soft);
+  margin-top:var(--s-4);
+  position:relative;
+  overflow:hidden;
+  animation:flowGrad 5s linear infinite;
+}
+.conclusion-box::before{content:"";position:absolute;top:-30px;right:-30px;width:120px;height:120px;border-radius:50%;background:rgba(255,255,255,0.1)}
+.conclusion-box p{font-family:var(--font-serif);font-size:clamp(22px,3vw,32px);font-weight:700;color:#FFFFFF;line-height:1.4;max-width:30ch;position:relative}
+.conclusion-box strong{background:var(--c-gold);color:var(--c-ink);padding:0 8px;border-radius:4px}
+
+/* 分析段 */
+.analysis-item{padding:var(--s-3) 0;border-bottom:2px dashed var(--c-line)}
+.analysis-item:last-child{border-bottom:none}
+
+/* 条纹装饰边 */
+.stripe-deco{
+  position:absolute;left:0;top:0;bottom:0;width:8px;
+  background:repeating-linear-gradient(0deg,
+    var(--c-accent) 0 12px,
+    var(--c-gold) 12px 24px,
+    var(--c-cyan) 24px 36px,
+    var(--c-purple) 36px 48px);
+  z-index:2;
+}
+
+/* ================================================================
+   动效:丰富(弹跳 + 渐变流动 + 浮动)
+   ================================================================ */
+.slide{opacity:0;transform:translateY(24px) scale(0.98);transition:opacity .5s ease,transform .5s cubic-bezier(.34,1.56,.64,1)}
+.slide.seen{opacity:1;transform:translateY(0) scale(1)}
+
+/* ================================================================
+   响应式
+   ================================================================ */
+@media (max-width:768px){
+  :root{--grid-cols:6;--grid-gap:16px}
+  .col-8,.col-6,.col-4,.col-3{grid-column:span 6}
+  .slide{padding:var(--s-5) var(--s-3)}
+  .risk-item{grid-template-columns:1fr}
+  .toc-list{grid-template-columns:1fr}
+  h1{font-size:32px}
+  h2{font-size:26px}
+  p{font-size:14px}
+  .metric__num{font-size:26px}
+  .table{font-size:12px}
+  .conclusion-box p{font-size:20px}
+  .nav button{width:40px;height:40px}
+  .slide::before,.slide::after{display:none}
+}
+
+/* ================================================================
+   打印 / PPT 导出(每 slide 一页,保留色彩,简化装饰)
+   ================================================================ */
+@media print{
+  .nav,.pager{display:none}
+  .progress{position:absolute}
+  .slide{page-break-after:always;min-height:100vh;border:none}
+  .slide:last-child{page-break-after:auto}
+  .slide::before,.slide::after{display:none}
+  body{background:#FFFFFF;background-image:none}
+  h1,h2{-webkit-text-fill-color:var(--c-deep);color:var(--c-deep)}
+}
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<div class="pager" id="pager">01 / 08</div>
+<div class="nav">
+  <button id="prev" aria-label="上一页">←</button>
+  <button id="next" aria-label="下一页">-></button>
+</div>
+
+<main class="deck">
+
+  <!-- ============ 1. 封面 ============ -->
+  <section class="slide slide--cover seen">
+    <div class="stripe-deco"></div>
+    <div class="grid">
+      <div class="col-12">
+        <span class="tag">极繁主义 · Maximalism</span>
+      </div>
+      <!-- [SECTION: 封面] 替换标题/副标题/场景 -->
+      <div class="col-8" style="margin-top:64px">
+        <div class="eyebrow">营销战略方案 / Marketing Strategy</div>
+        <h1>{{TITLE}}<br>{{SCENARIO}}</h1>
+        <p class="lead" style="margin-top:24px">{{SUBTITLE}}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 2. 目录 ============ -->
+  <section class="slide">
+    <div class="grid">
+      <div class="col-12">
+        <div class="eyebrow">目录 / Contents</div>
+        <h2>方案结构</h2>
+      </div>
+      <div class="col-12">
+        <div class="toc-list">
+          <div class="toc-item"><span class="toc-item__num">01</span><span>核心结论</span></div>
+          <div class="toc-item"><span class="toc-item__num">02</span><span>STP 市场定位</span></div>
+          <div class="toc-item"><span class="toc-item__num">03</span><span>4P 营销组合</span></div>
+          <div class="toc-item"><span class="toc-item__num">04</span><span>POES 渠道组合</span></div>
+          <div class="toc-item"><span class="toc-item__num">05</span><span>增长路径(AARRR + 飞轮)</span></div>
+          <div class="toc-item"><span class="toc-item__num">06</span><span>行动建议(P0 / P1)</span></div>
+          <div class="toc-item"><span class="toc-item__num">07</span><span>风险预案</span></div>
+          <div class="toc-item"><span class="toc-item__num">08</span><span>复盘指标</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 3. 核心结论 ============ -->
+  <section class="slide">
+    <div class="grid">
+      <div class="col-12">
+        <div class="eyebrow">核心结论 / Conclusion</div>
+        <h2>一句话定调</h2>
+      </div>
+      <!-- [SECTION: 核心结论] 替换为你的结论 -->
+      <div class="col-8">
+        <div class="conclusion-box">
+          <p>{{CONCLUSION}}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4. STP + 4P ============ -->
+  <section class="slide">
+    <div class="grid">
+      <div class="col-12">
+        <div class="eyebrow">市场定位 + 营销组合</div>
+        <h2>STP × 4P</h2>
+      </div>
+      <div class="col-6">
+        <span class="model-ref">MODEL · STP</span>
+        <h3>STP 市场定位</h3>
+        <!-- [SECTION: STP 内容] 替换为你的 STP 分析 -->
+        <p>{{FRAMEWORKS}}</p>
+      </div>
+      <div class="col-6">
+        <span class="model-ref">MODEL · 4P</span>
+        <h3>4P 营销组合</h3>
+        <!-- [SECTION: 4P 内容] 替换为你的 4P 分析 -->
+        <p>{{FRAMEWORKS}}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 5. POES + 增长 ============ -->
+  <section class="slide">
+    <div class="grid">
+      <div class="col-12">
+        <div class="eyebrow">渠道组合 + 增长路径</div>
+        <h2>POES × AARRR</h2>
+      </div>
+      <div class="col-6">
+        <span class="model-ref">MODEL · POES</span>
+        <h3>POES 渠道组合</h3>
+        <!-- [SECTION: POES 内容] 替换为你的 POES 分析 -->
+        <p>{{FRAMEWORKS}}</p>
+      </div>
+      <div class="col-6">
+        <span class="model-ref">MODEL · AARRR + 飞轮</span>
+        <h3>增长路径</h3>
+        <!-- [SECTION: 增长内容] 替换为你的增长路径 -->
+        <p>{{FRAMEWORKS}}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 6. 行动建议 ============ -->
+  <section class="slide">
+    <div class="grid">
+      <div class="col-12">
+        <div class="eyebrow">行动建议 / Action</div>
+        <h2>P0 / P1 优先级</h2>
+      </div>
+      <!-- [SECTION: 行动建议表] 替换为你的行动建议 -->
+      <div class="col-12">
+        <table class="table">
+          <thead>
+            <tr><th>优先级</th><th>动作</th><th>负责</th><th>时间</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="p0">P0</td><td>{{FRAMEWORKS}}</td><td>{{FRAMEWORKS}}</td><td>{{FRAMEWORKS}}</td></tr>
+            <tr><td class="p1">P1</td><td>{{FRAMEWORKS}}</td><td>{{FRAMEWORKS}}</td><td>{{FRAMEWORKS}}</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 7. 风险预案 ============ -->
+  <section class="slide">
+    <div class="grid">
+      <div class="col-12">
+        <div class="eyebrow">风险预案 / Risk</div>
+        <h2>风险与应对</h2>
+      </div>
+      <!-- [SECTION: 风险预案] 替换为你的风险预案 -->
+      <div class="col-12">
+        <div class="risk-item">
+          <div class="risk-item__r">{{FRAMEWORKS}}</div>
+          <div class="risk-item__p">{{FRAMEWORKS}}</div>
+        </div>
+        <div class="risk-item">
+          <div class="risk-item__r">{{FRAMEWORKS}}</div>
+          <div class="risk-item__p">{{FRAMEWORKS}}</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 8. 复盘指标 ============ -->
+  <section class="slide">
+    <div class="grid">
+      <div class="col-12">
+        <div class="eyebrow">复盘指标 / Metrics</div>
+        <h2>关键数据</h2>
+      </div>
+      <div class="col-3">
+        <div class="metric metric--1">
+          <div class="metric__num">{{METRIC_1_NUM}}</div>
+          <div class="metric__label">{{METRIC_1_LABEL}}</div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="metric metric--2">
+          <div class="metric__num">{{METRIC_2_NUM}}</div>
+          <div class="metric__label">{{METRIC_2_LABEL}}</div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="metric metric--3">
+          <div class="metric__num">{{METRIC_3_NUM}}</div>
+          <div class="metric__label">{{METRIC_3_LABEL}}</div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="metric metric--4">
+          <div class="metric__num">{{METRIC_4_NUM}}</div>
+          <div class="metric__label">{{METRIC_4_LABEL}}</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+(function(){
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  let idx = 0;
+  const progress = document.getElementById('progress');
+  const pager = document.getElementById('pager');
+
+  function pad(n){return String(n).padStart(2,'0');}
+
+  function setActive(i){
+    idx = i;
+    slides[i].classList.add('seen');
+    progress.style.width = ((idx+1)/total*100) + '%';
+    pager.textContent = pad(idx+1) + ' / ' + pad(total);
+  }
+
+  setActive(0);
+
+  function go(n){
+    n = Math.max(0, Math.min(total - 1, n));
+    setActive(n);
+    slides[n].scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  document.getElementById('prev').addEventListener('click', ()=>go(idx-1));
+  document.getElementById('next').addEventListener('click', ()=>go(idx+1));
+
+  document.addEventListener('keydown', e=>{
+    if(e.key==='ArrowRight' || e.key===' '){e.preventDefault();go(idx+1);}
+    else if(e.key==='ArrowLeft'){e.preventDefault();go(idx-1);}
+    else if(e.key==='Home'){e.preventDefault();go(0);}
+    else if(e.key==='End'){e.preventDefault();go(total-1);}
+    else if(e.key==='p' || e.key==='P'){window.print();}
+  });
+
+  // 滚动同步:进入视口即标记可见(永久) + 更新页码
+  const io = new IntersectionObserver(entries=>{
+    entries.forEach(en=>{
+      if(en.isIntersecting){
+        en.target.classList.add('seen');
+        const i = Array.from(slides).indexOf(en.target);
+        if(i>=0 && i!==idx){setActive(i);}
+      }
+    });
+  },{threshold:0.3});
+  slides.forEach(s=>io.observe(s));
+})();
+</script>
+</body>
+</html>

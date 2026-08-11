@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<!--
+==================================================================
+  template-04-pixel-art.html
+  风格: 像素风 (Pixel Art / 8-bit)  |  12 视觉风格 4/12
+  归属: strategic-marketing-director v2.0.0 · 输出交付模板
+  原则: 深底荧光字 + 像素字体(等宽+宽字距) + 方块边框 + 8-bit调色板 + 阶跃动效
+  技术栈: 原生 HTML/CSS/JS,零依赖,单文件,响应式 + 打印适配
+  协议: MIT,随 skill 开源分发
+
+  【使用说明】
+  1. 用途:营销战略方案的可视化交付载体(html 报告 + ppt deck 二合一)
+  2. 替换下方"占位符清单"中的各占位符为你的内容;示例内容为薇诺娜 Q4 大促 demo
+  3. 标记为 [SECTION: XX] 的 HTML 注释块为可变区域,替换整段为你的内容
+  4. 交互:← / -> 翻页,空格下一页,Home/End 首尾页,P 打印/导出 PDF
+  5. 本地预览: 直接浏览器打开本文件(零依赖,无需服务器)
+
+  【占位符清单】(与 12 模板统一 schema)
+  | 占位符            | 说明          | 必填 | 示例值(薇诺娜)    |
+  |-------------------|---------------|------|--------------------|
+  | {{TITLE}}         | 品牌/项目名   | 是   | 薇诺娜             |
+  | {{SUBTITLE}}      | 方案主旨      | 是   | 敏感肌专研心智...  |
+  | {{SCENARIO}}      | 场景/副标题   | 是   | Q4 大促全案        |
+  | {{CONCLUSION}}    | 核心结论      | 是   | 双 11 GMV 目标...  |
+  | {{FRAMEWORKS}}    | 方法论模型内容| 是   | STP/4P/POES...     |
+  | {{METRIC_1_NUM}}  | 指标1数值     | 是   | 5.2亿              |
+  | {{METRIC_1_LABEL}}| 指标1标签     | 是   | GMV 目标           |
+  | {{METRIC_2_NUM}}  | 指标2数值     | 是   | 38%                |
+  | {{METRIC_2_LABEL}}| 指标2标签     | 是   | 同比增长           |
+  | {{METRIC_3_NUM}}  | 指标3数值     | 是   | 3.2                |
+  | {{METRIC_3_LABEL}}| 指标3标签     | 是   | ROI                |
+  | {{METRIC_4_NUM}}  | 指标4数值     | 是   | 65%                |
+  | {{METRIC_4_LABEL}}| 指标4标签     | 是   | 复购率             |
+
+  【结构】8 slides: 封面 / 目录 / 核心结论 / STP+4P / POES+增长 / 行动建议 / 风险预案 / 复盘指标
+==================================================================
+-->
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{TITLE}} · 营销战略方案 · 像素风</title>
+<style>
+/* ================================================================
+   设计 Token(像素风:深底 + 荧光绿 + 8-bit 调色板)
+   ================================================================ */
+:root{
+  /* 深空底 + 荧光绿主色(8-bit/像素标志色) */
+  --c-bg: #0F0F0F;            /* 深黑底 */
+  --c-surface: #1A1A1A;       /* 卡片底 */
+  --c-ink: #39FF14;           /* 荧光绿 主文字/主强调 */
+  --c-cyan: #00FFFF;          /* 青 8-bit 撞色 */
+  --c-magenta: #FF00FF;       /* 品红 8-bit 撞色 */
+  --c-yellow: #FFFF00;        /* 亮黄 8-bit 撞色 */
+  --c-dim: #2A4A2A;           /* 暗绿 次级边框 */
+  --c-muted: #5A8A5A;         /* 暗绿灰 辅助文字 */
+
+  /* 像素字体:等宽 + 宽字距模拟 8-bit */
+  --font-sans: "SF Mono", "Courier New", Consolas, Menlo, "PingFang SC", "Microsoft YaHei", monospace;
+  --font-mono: "SF Mono", Menlo, Consolas, "Courier New", monospace;
+
+  /* 间距:8px 基准(像素网格对齐) */
+  --s-1: 8px; --s-2: 16px; --s-3: 24px; --s-4: 32px;
+  --s-5: 48px; --s-6: 64px; --s-7: 96px;
+
+  /* 圆角:0(方块) */
+  --r: 0;
+  /* 方块边框(像素感) */
+  --border: 4px solid var(--c-ink);
+  --border-dim: 4px solid var(--c-dim);
+  /* 像素阴影:无模糊硬偏移 */
+  --shadow: 0 0 0 4px var(--c-bg), 0 0 0 8px var(--c-ink);
+
+  --grid-cols: 12;
+  --grid-gap: 20px;
+  --max-width: 1100px;
+}
+
+/* ================================================================
+   Reset
+   ================================================================ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px;scroll-behavior:smooth}
+body{
+  font-family:var(--font-sans);
+  color:var(--c-ink);
+  background:var(--c-bg);
+  font-weight:400;
+  line-height:1.6;
+  letter-spacing:0.5px;
+  -webkit-font-smoothing:none;
+  image-rendering:pixelated;
+}
+/* 像素网格背景 */
+body::before{
+  content:"";position:fixed;inset:0;z-index:-1;
+  background-image:
+    linear-gradient(rgba(57,255,20,0.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(57,255,20,0.03) 1px,transparent 1px);
+  background-size:16px 16px;
+  pointer-events:none;
+}
+
+/* ================================================================
+   Deck 翻页系统
+   ================================================================ */
+.deck{position:relative}
+.slide{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:var(--s-6) var(--s-5);
+  border-bottom:var(--border-dim);
+  background:var(--c-bg);
+  position:relative;
+}
+.slide:nth-child(even){background:#0C0C0C}
+
+/* 翻页控制(方块 + 像素边 + hover 闪烁) */
+.nav{
+  position:fixed;bottom:var(--s-3);right:var(--s-3);
+  display:flex;gap:var(--s-1);z-index:100;
+}
+.nav button{
+  width:48px;height:48px;
+  border:var(--border);
+  background:var(--c-surface);
+  color:var(--c-ink);
+  font-size:18px;font-weight:700;
+  font-family:var(--font-mono);
+  cursor:pointer;
+  border-radius:var(--r);
+  transition:none;
+}
+.nav button:hover{background:var(--c-ink);color:var(--c-bg);animation:blink .5s steps(2) infinite}
+.nav button:active{background:var(--c-cyan)}
+.nav button:focus-visible{outline:4px solid var(--c-cyan);outline-offset:2px}
+
+@keyframes blink{0%,49%{opacity:1}50%,100%{opacity:0.6}}
+
+/* 进度条:像素方块拼接 */
+.progress{
+  position:fixed;top:0;left:0;
+  height:8px;
+  background:repeating-linear-gradient(90deg,
+    var(--c-ink) 0 8px,
+    var(--c-bg) 8px 12px);
+  z-index:101;transition:width .2s steps(8);
+}
+
+/* 页码:绿底深字方块 */
+.pager{
+  position:fixed;bottom:var(--s-3);left:var(--s-3);
+  font-family:var(--font-mono);
+  font-size:13px;font-weight:700;
+  color:var(--c-bg);
+  background:var(--c-ink);
+  border:var(--border);
+  padding:6px 12px;
+  letter-spacing:2px;
+  z-index:100;
+}
+
+/* ================================================================
+   排版(像素字体 + 宽字距 + 大写 + 8-bit 感)
+   ================================================================ */
+.eyebrow{
+  display:inline-block;
+  font-size:12px;font-weight:700;
+  letter-spacing:3px;text-transform:uppercase;
+  color:var(--c-cyan);
+  border:2px solid var(--c-cyan);
+  padding:4px 10px;
+  margin-bottom:var(--s-3);
+}
+h1{font-size:clamp(32px,6vw,64px);font-weight:700;line-height:1.1;letter-spacing:2px;text-transform:uppercase;color:var(--c-ink);text-shadow:4px 4px 0 var(--c-dim)}
+h2{font-size:clamp(26px,4.5vw,44px);font-weight:700;line-height:1.15;letter-spacing:2px;margin-bottom:var(--s-4);text-transform:uppercase;color:var(--c-ink);text-shadow:3px 3px 0 var(--c-dim)}
+h3{font-size:18px;font-weight:700;line-height:1.3;margin-bottom:var(--s-2);text-transform:uppercase;letter-spacing:1px;color:var(--c-yellow)}
+p{font-size:15px;color:var(--c-ink);line-height:1.7;max-width:65ch;font-weight:400;opacity:0.85}
+.lead{font-size:clamp(16px,2vw,20px);color:var(--c-ink);line-height:1.6;max-width:60ch;font-weight:400;opacity:0.9}
+strong,b{font-weight:700;color:var(--c-yellow)}
+
+/* ================================================================
+   12 列网格系统
+   ================================================================ */
+.grid{
+  display:grid;
+  grid-template-columns:repeat(var(--grid-cols),1fr);
+  gap:var(--grid-gap);
+  align-items:start;
+  width:100%;max-width:var(--max-width);
+  margin:0 auto;
+}
+.col-12{grid-column:span 12}
+.col-8{grid-column:span 8}
+.col-6{grid-column:span 6}
+.col-4{grid-column:span 4}
+.col-3{grid-column:span 3}
+
+/* ================================================================
+   组件(方块边框 + 像素感 + 8-bit 撞色)
+   ================================================================ */
+/* 标签:荧光绿底深字方块 */
+.tag{
+  display:inline-block;
+  padding:6px 14px;
+  font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  background:var(--c-ink);
+  color:var(--c-bg);
+  border:var(--border);
+}
+
+/* 模型标注:青色边框 */
+.model-ref{
+  font-family:var(--font-mono);
+  font-size:12px;font-weight:700;
+  color:var(--c-cyan);
+  border:2px solid var(--c-cyan);
+  padding:4px 10px;
+  display:inline-block;
+  margin-bottom:var(--s-2);
+  letter-spacing:1px;
+}
+
+/* 表格:像素方块边框 */
+.table{width:100%;border-collapse:collapse;font-size:14px;border:var(--border);background:var(--c-surface)}
+.table th{
+  background:var(--c-ink);color:var(--c-bg);
+  padding:var(--s-2);text-align:left;font-weight:700;
+  letter-spacing:1px;text-transform:uppercase;font-size:12px;
+  border:2px solid var(--c-ink);
+}
+.table td{padding:var(--s-2);border:2px solid var(--c-dim);vertical-align:top;color:var(--c-ink);font-weight:400}
+.table .p0{background:var(--c-magenta);color:var(--c-bg);font-weight:700}
+.table .p1{background:var(--c-surface);color:var(--c-cyan);font-weight:700}
+
+/* 指标卡片:方块边框 + 8-bit 撞色 */
+.metric{
+  border:var(--border);
+  padding:var(--s-3);
+  background:var(--c-surface);
+  overflow:hidden;
+  word-break:break-word;
+  position:relative;
+}
+.metric--green{background:var(--c-ink);color:var(--c-bg)}
+.metric--cyan{background:var(--c-surface);border-color:var(--c-cyan)}
+.metric--magenta{background:var(--c-surface);border-color:var(--c-magenta)}
+.metric--yellow{background:var(--c-surface);border-color:var(--c-yellow)}
+.metric__num{font-size:clamp(26px,4vw,42px);font-weight:700;color:inherit;line-height:1;letter-spacing:1px;overflow-wrap:anywhere;word-break:break-word;max-width:100%}
+.metric--green .metric__num{color:var(--c-bg)}
+.metric--cyan .metric__num{color:var(--c-cyan)}
+.metric--magenta .metric__num{color:var(--c-magenta)}
+.metric--yellow .metric__num{color:var(--c-yellow)}
+.metric__label{font-size:11px;color:inherit;opacity:0.8;letter-spacing:2px;text-transform:uppercase;margin-top:var(--s-2);font-weight:700;overflow-wrap:anywhere;line-height:1.4}
+/* 像素角标 */
+.metric::before{content:"";position:absolute;top:0;left:0;width:8px;height:8px;background:var(--c-yellow)}
+
+/* 风险预案 */
+.risk-item{
+  display:grid;grid-template-columns:1fr 1fr;gap:var(--s-2);
+  padding:var(--s-2) 0;
+  border-bottom:2px dashed var(--c-dim);
+}
+.risk-item__r{font-weight:700;color:var(--c-magenta);font-size:15px}
+.risk-item__p{color:var(--c-ink);font-size:13px;font-weight:400;opacity:0.8}
+
+/* ================================================================
+   页面类型
+   ================================================================ */
+/* 封面 */
+.slide--cover{justify-content:flex-start;padding-top:var(--s-7)}
+
+/* 目录:绿底深字序号 + 两栏 */
+.toc-item{
+  display:flex;align-items:center;gap:var(--s-2);
+  padding:var(--s-2) 0;
+  border-bottom:2px solid var(--c-dim);
+}
+.toc-item__num{
+  font-family:var(--font-mono);
+  background:var(--c-ink);color:var(--c-bg);
+  font-weight:700;font-size:13px;
+  min-width:40px;text-align:center;padding:6px 0;
+  border:2px solid var(--c-ink);
+  letter-spacing:1px;
+}
+.toc-list{display:grid;grid-template-columns:1fr 1fr;gap:0 var(--s-5)}
+
+/* 核心结论:绿边方块 + 深底 */
+.conclusion-box{
+  border:var(--border);
+  padding:var(--s-4) var(--s-5);
+  background:var(--c-surface);
+  box-shadow:8px 8px 0 var(--c-dim);
+  margin-top:var(--s-4);
+  position:relative;
+}
+.conclusion-box::before{content:">";color:var(--c-cyan);font-weight:700;margin-right:var(--s-2)}
+.conclusion-box p{font-size:clamp(20px,3vw,30px);font-weight:700;color:var(--c-ink);line-height:1.4;max-width:30ch;display:inline}
+.conclusion-box strong{background:var(--c-yellow);color:var(--c-bg);padding:0 6px}
+
+/* 分析段 */
+.analysis-item{padding:var(--s-3) 0;border-bottom:2px solid var(--c-dim)}
+.analysis-item:last-child{border-bottom:none}
+
+/* 像素装饰方块 */
+.pixel-deco{position:absolute;width:32px;height:32px;border:4px solid var(--c-ink);z-index:0}
+.pixel-deco--tl{top:var(--s-5);left:var(--s-5);background:var(--c-magenta)}
+.pixel-deco--br{bottom:var(--s-5);right:var(--s-5);background:var(--c-cyan);width:24px;height:24px}
+
+/* ================================================================
+   动效:阶跃(steps),像素游戏感(无缓动)
+   ================================================================ */
+.slide{opacity:0;transform:translateY(16px);transition:opacity .25s steps(4),transform .25s steps(4)}
+.slide.seen{opacity:1;transform:translateY(0)}
+.metric,.table tr,.toc-item{transition:opacity .15s steps(2)}
+
+/* ================================================================
+   响应式
+   ================================================================ */
+@media (max-width:768px){
+  :root{--grid-cols:6;--grid-gap:16px}
+  .col-8,.col-6,.col-4,.col-3{grid-column:span 6}
+  .slide{padding:var(--s-5) var(--s-3)}
+  .risk-item{grid-template-columns:1fr}
+  .toc-list{grid-template-columns:1fr}
+  h1{font-size:28px;letter-spacing:1px}
+  h2{font-size:24px}
+  p{font-size:13px}
+  .metric__num{font-size:24px}
+  .table{font-size:11px}
+  .conclusion-box p{font-size:18px}
+  .nav button{width:40px;height:40px}
+  .pixel-deco{display:none}
+}
+
+/* ================================================================
+   打印 / PPT 导出(每 slide 一页)
+   ================================================================ */
+@media print{
+  .nav,.pager{display:none}
+  .progress{position:absolute}
+  .slide{page-break-after:always;min-height:100vh;border:none;background:#FFFFFF;color:#0F0F0F}
+  .slide:last-child{page-break-after:auto}
+  body{background:#FFFFFF}
+  body::before{display:none}
+  h1,h2,h3,p{color:#0F0F0F;text-shadow:none}
+}
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<div class="pager" id="pager">01 / 08</div>
+<div class="nav">
+  <button id="prev" aria-label="上一页">&lt;</button>
+  <button id="next" aria-label="下一页">&gt;</button>
+</div>
+
+<main class="deck">
+
+  <!-- ============ 1. 封面 ============ -->
+  <section class="slide slide--cover seen">
+    <div class="pixel-deco pixel-deco--tl"></div>
+    <div class="pixel-deco pixel-deco--br"></div>
+    <div class="grid">
+      <div class="col-12">
+        <span class="tag">像素风 · Pixel Art</span>
+      </div>
+      <!-- [SECTION: 封面] 替换标题/副标题/场景 -->
+      <div class="col-8" style="margin-top:64px;position:relative;z-index:1">
+        <div class="eyebrow">营销战略方案 / Marketing Strategy</div>
+        <h1>{{TITLE}}<br>{{SCENARIO}}</h1>
+        <p class="lead" style="margin-top:24px">{{SUBTITLE}}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 2. 目录 ============ -->
+  <section class="slide">
+    <div class="grid">
+      <div class="col-12">
+        <div class="eyebrow">目录 / Contents</div>
+        <h2>方案结构</h2>
+      </div>
+      <div class="col-12">
+        <div class="toc-list">
+          <div class="toc-item"><span class="toc-item__num">01</span><span>核心结论</span></div>
+          <div class="toc-item"><span class="toc-item__num">02</span><span>STP 市场定位</span></div>
+          <div class="toc-item"><span class="toc-item__num">03</span><span>4P 营销组合</span></div>
+          <div class="toc-item"><span class="toc-item__num">04</span><span>POES 渠道组合</span></div>
+          <div class="toc-item"><span class="toc-item__num">05</span><span>增长路径(AARRR + 飞轮)</span></div>
+          <div class="toc-item"><span class="toc-item__num">06</span><span>行动建议(P0 / P1)</span></div>
+          <div class="toc-item"><span class="toc-item__num">07</span><span>风险预案</span></div>
+          <div class="toc-item"><span class="toc-item__num">08</span><span>复盘指标</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 3. 核心结论 ============ -->
+  <section class="slide">
+    <div class="grid">
+      <div class="col-12">
+        <div class="eyebrow">核心结论 / Conclusion</div>
+        <h2>一句话定调</h2>
+      </div>
+      <!-- [SECTION: 核心结论] 替换为你的结论 -->
+      <div class="col-8">
+        <div class="conclusion-box">
+          <p>{{CONCLUSION}}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 4. STP + 4P ============ -->
+  <section class="slide">
+    <div class="grid">
+      <div class="col-12">
+        <div class="eyebrow">市场定位 + 营销组合</div>
+        <h2>STP × 4P</h2>
+      </div>
+      <div class="col-6">
+        <span class="model-ref">MODEL · STP</span>
+        <h3>STP 市场定位</h3>
+        <!-- [SECTION: STP 内容] 替换为你的 STP 分析 -->
+        <p>{{FRAMEWORKS}}</p>
+      </div>
+      <div class="col-6">
+        <span class="model-ref">MODEL · 4P</span>
+        <h3>4P 营销组合</h3>
+        <!-- [SECTION: 4P 内容] 替换为你的 4P 分析 -->
+        <p>{{FRAMEWORKS}}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 5. POES + 增长 ============ -->
+  <section class="slide">
+    <div class="grid">
+      <div class="col-12">
+        <div class="eyebrow">渠道组合 + 增长路径</div>
+        <h2>POES × AARRR</h2>
+      </div>
+      <div class="col-6">
+        <span class="model-ref">MODEL · POES</span>
+        <h3>POES 渠道组合</h3>
+        <!-- [SECTION: POES 内容] 替换为你的 POES 分析 -->
+        <p>{{FRAMEWORKS}}</p>
+      </div>
+      <div class="col-6">
+        <span class="model-ref">MODEL · AARRR + 飞轮</span>
+        <h3>增长路径</h3>
+        <!-- [SECTION: 增长内容] 替换为你的增长路径 -->
+        <p>{{FRAMEWORKS}}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 6. 行动建议 ============ -->
+  <section class="slide">
+    <div class="grid">
+      <div class="col-12">
+        <div class="eyebrow">行动建议 / Action</div>
+        <h2>P0 / P1 优先级</h2>
+      </div>
+      <!-- [SECTION: 行动建议表] 替换为你的行动建议 -->
+      <div class="col-12">
+        <table class="table">
+          <thead>
+            <tr><th>优先级</th><th>动作</th><th>负责</th><th>时间</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="p0">P0</td><td>{{FRAMEWORKS}}</td><td>{{FRAMEWORKS}}</td><td>{{FRAMEWORKS}}</td></tr>
+            <tr><td class="p1">P1</td><td>{{FRAMEWORKS}}</td><td>{{FRAMEWORKS}}</td><td>{{FRAMEWORKS}}</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 7. 风险预案 ============ -->
+  <section class="slide">
+    <div class="grid">
+      <div class="col-12">
+        <div class="eyebrow">风险预案 / Risk</div>
+        <h2>风险与应对</h2>
+      </div>
+      <!-- [SECTION: 风险预案] 替换为你的风险预案 -->
+      <div class="col-12">
+        <div class="risk-item">
+          <div class="risk-item__r">{{FRAMEWORKS}}</div>
+          <div class="risk-item__p">{{FRAMEWORKS}}</div>
+        </div>
+        <div class="risk-item">
+          <div class="risk-item__r">{{FRAMEWORKS}}</div>
+          <div class="risk-item__p">{{FRAMEWORKS}}</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ 8. 复盘指标 ============ -->
+  <section class="slide">
+    <div class="grid">
+      <div class="col-12">
+        <div class="eyebrow">复盘指标 / Metrics</div>
+        <h2>关键数据</h2>
+      </div>
+      <div class="col-3">
+        <div class="metric metric--green">
+          <div class="metric__num">{{METRIC_1_NUM}}</div>
+          <div class="metric__label">{{METRIC_1_LABEL}}</div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="metric metric--cyan">
+          <div class="metric__num">{{METRIC_2_NUM}}</div>
+          <div class="metric__label">{{METRIC_2_LABEL}}</div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="metric metric--magenta">
+          <div class="metric__num">{{METRIC_3_NUM}}</div>
+          <div class="metric__label">{{METRIC_3_LABEL}}</div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="metric metric--yellow">
+          <div class="metric__num">{{METRIC_4_NUM}}</div>
+          <div class="metric__label">{{METRIC_4_LABEL}}</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+(function(){
+  const slides = document.querySelectorAll('.slide');
+  const total = slides.length;
+  let idx = 0;
+  const progress = document.getElementById('progress');
+  const pager = document.getElementById('pager');
+
+  function pad(n){return String(n).padStart(2,'0');}
+
+  function setActive(i){
+    idx = i;
+    slides[i].classList.add('seen');
+    progress.style.width = ((idx+1)/total*100) + '%';
+    pager.textContent = pad(idx+1) + ' / ' + pad(total);
+  }
+
+  setActive(0);
+
+  function go(n){
+    n = Math.max(0, Math.min(total - 1, n));
+    setActive(n);
+    slides[n].scrollIntoView({behavior:'smooth', block:'start'});
+  }
+
+  document.getElementById('prev').addEventListener('click', ()=>go(idx-1));
+  document.getElementById('next').addEventListener('click', ()=>go(idx+1));
+
+  document.addEventListener('keydown', e=>{
+    if(e.key==='ArrowRight' || e.key===' '){e.preventDefault();go(idx+1);}
+    else if(e.key==='ArrowLeft'){e.preventDefault();go(idx-1);}
+    else if(e.key==='Home'){e.preventDefault();go(0);}
+    else if(e.key==='End'){e.preventDefault();go(total-1);}
+    else if(e.key==='p' || e.key==='P'){window.print();}
+  });
+
+  // 滚动同步:进入视口即标记可见(永久) + 更新页码
+  const io = new IntersectionObserver(entries=>{
+    entries.forEach(en=>{
+      if(en.isIntersecting){
+        en.target.classList.add('seen');
+        const i = Array.from(slides).indexOf(en.target);
+        if(i>=0 && i!==idx){setActive(i);}
+      }
+    });
+  },{threshold:0.3});
+  slides.forEach(s=>io.observe(s));
+})();
+</script>
+</body>
+</html>

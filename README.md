@@ -1,67 +1,61 @@
 # strategic-marketing-director
 
-战略营销总监决策系统 - 整合20+经典分析模型，提供「诊断→策略→执行→复盘」全链路工作流。
+商业营销战略决策大脑 - 整合9库210+模型,提供「搜索->诊断->策略->执行->复盘」5阶段全链路工作流。
 
 ## 项目简介
 
-本项目是一个战略营销总监技能包，为品牌营销决策提供结构化的分析框架和工作流程。
+本项目是一个商业营销战略决策技能包(skill),面向品牌顾问/企业老板/CMO/产品经理/操盘手/CEO 6类决策者。当用户提出商业营销问题时,自动路由最优决策框架,经5阶段闭环,产出结构化、可执行、数据驱动、可闭环落地的营销方案。
+
+## 核心能力
+
+- **9库210+模型**:战略分析/思维方法/品牌定位/营销传播/用户增长/消费者心理/数据分析/运营执行/销售变现
+- **9组决策框架**:模型按分析链路系统化组合(场景+调用顺序+输出),非孤立堆砌
+- **5阶段闭环**:搜索(拉数据)->诊断(找根因)->策略(定方案)->执行(倒推SOP)->复盘(验证迭代)
+- **思维方法论驱动链**:8思维模型各驱动一决策环节,收敛+发散双闭环
+- **POES 12渠道体系**:付费/自有/赢得/共享,链路+SOP+方法论
+- **7层深度心理洞察**:三层穿透法+15应用点闭环
+- **增长执行SOP**:5 Phase增长闭环+5标准化交付模板
+- **多格式品牌化输出**:md/html/ppt 3格式 + 5调性 + 5视觉风格HTML模板
 
 ## 项目结构
 
 ```
 strategic-marketing-director/
-├── SKILL.md                    # 主技能文件（战略营销总监核心内容）
-├── references/                 # 参考模型库
-│   ├── strategic-models.md     # 战略分析模型（五力/SWOT/PESTEL/BCG等）
-│   ├── thinking-models.md      # 思维方法模型（MECE/金字塔/六帽等）
-│   ├── brand-models.md         # 品牌定位模型（定位三角/Kapferer/Aaker等）
-│   ├── marketing-models.md     # 营销传播模型（4P/STP/AIDA/GTM等）
-│   ├── growth-models.md        # 用户增长模型（AARRR/AIPL/北极星等）
-│   ├── psychology-models.md    # 消费者心理模型（BJ Fogg/COM-B/Nudge等）
-│   ├── data-models.md          # 数据分析模型（RFM/HEART/NPS等）
-│   ├── operations-models.md    # 运营执行模型（PDCA/OKR/RACI等）
-│   └── sales-models.md         # 销售变现模型（销售漏斗/MEDDIC/定价等）
-├── evals/                      # 评估模块
-│   └── .gitkeep
-└── scripts/                    # 脚本工具
-    └── .gitkeep
+├── SKILL.md                # 入口:能力中枢+路由
+├── CHANGELOG.md            # 版本变更记录
+├── LICENSE                 # MPL-2.0
+├── references/             # 16参考文档(9基础库+7扩展库)
+├── templates/              # 5视觉风格HTML模板 + 总览页
+├── evals/                  # 3测试用例
+└── scripts/                # 脚本工具(预留)
 ```
 
-## 核心功能
+## 5视觉风格HTML模板
 
-### 触发场景
+| 模板 | 风格 | 品牌色 |
+|---|---|---|
+| template-01-modernism.html | 现代主义(包豪斯) | #DA1F26 |
+| template-02-minimalism.html | 极简主义 | #FFD60A |
+| template-03-brutalism.html | 新野兽派 | #FF3D7F |
+| template-04-pixel-art.html | 像素风 | #39FF14 |
+| template-05-maximalism.html | 极繁主义 | #E91E63 |
 
-| 场景 | 调用模型 |
-|------|---------|
-| 市场分析、竞争分析 | 战略分析模型（五力/SWOT/PESTEL/BCG/安索夫/3C/蓝海） |
-| 问题拆解、决策分析 | 思维方法模型（MECE/金字塔/SCQA/六帽/5W2H/决策树） |
-| 品牌定位、品牌战略 | 品牌定位模型（定位三角/Kapferer/Aaker/价值主张/PMM） |
-| 营销策略、传播策略 | 营销传播模型（4P/STP/AIDA/PAS/GTM/ICP/SOSTAC/IMC） |
-| 用户增长、增长黑客 | 用户增长模型（AARRR/AIPL/AISAS/北极星/飞轮/Hook） |
-| 用户洞察、行为设计 | 消费者心理模型（BJ Fogg/COM-B/EAST/Nudge/KANO/CJM） |
-| 数据分析、效果评估 | 数据分析模型（RFM/HEART/NPS/LTV-CAC/A/B测试） |
-| 运营执行、项目管理 | 运营执行模型（PDCA/OKR/RACI/敏捷营销/SOP） |
-| 销售流程、定价策略 | 销售变现模型（销售漏斗/MEDDIC/定价/客户成功） |
-
-### 工作流阶段
-
-```
-诊断 → 策略 → 执行 → 复盘
-```
+零依赖单文件,统一8 slides + 13占位符schema + seen类滚动翻页 + 响应式打印。
 
 ## 使用方法
 
-1. 阅读 `SKILL.md` 了解完整的战略营销决策系统
-2. 根据需要查阅 `references/` 目录下的各类模型
-3. 结合实际业务场景应用相应模型
+1. **安装**:将本目录放入所用 agent 的 skills 目录(路径参考各 agent 官方文档)
+2. **触发**:提出商业营销问题时自动触发(见 SKILL.md frontmatter 触发场景与关键词)
+3. **使用模式**:单模型分析 / 决策框架组合 / 全链路5阶段(详见 SKILL.md)
 
 ## 版本信息
 
-- 版本：v1.0.0
-- 作者：黄大虾
-- 创建日期：2026-04-24
-- 模型数量：50+心智模型，20+决策启发式
+- 版本:v2.0.0
+- 作者:黄晓轩
+- 创建日期:2026-04-24
+- 更新日期:2026-08-10
+- 模型数量:210+心智模型,9组决策框架
 
 ## 许可证
 
-MIT License
+MPL-2.0(Mozilla Public License Version 2.0),详见 [LICENSE](LICENSE)。
