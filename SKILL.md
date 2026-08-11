@@ -17,7 +17,7 @@ description: |
   **关键词**：品牌营销、市场分析、营销策略、增长黑客、用户增长、品牌定位、销售策略、定价策略、营销总监
 license: MIT
 metadata:
-  author: 黄大虾
+  author: 黄晓轩
   version: 1.0.0
   created: 2026-04-24
   mental_models: 50+
@@ -294,5 +294,5 @@ metadata:
 
 ---
 
-*Created by 黄大虾 | 2026-04-24*
+*Created by 黄晓轩 | 2026-04-24*
 *Version 1.0.0 | 50+ Mental Models*
