@@ -1,5 +1,18 @@
 # strategic-marketing-director
 
+<div align="center">
+
+**商业营销战略决策大脑 · AI Agent Skill**
+
+![Version](https://img.shields.io/badge/version-2.0.0-ffb347?style=flat-square)
+![License](https://img.shields.io/badge/license-MPL--2.0-blue?style=flat-square)
+![Language](https://img.shields.io/badge/language-Markdown-lightgrey?style=flat-square)
+![Dependencies](https://img.shields.io/badge/dependencies-0-green?style=flat-square)
+
+</div>
+
+---
+
 商业营销战略决策大脑
 整合9库210+模型,提供「搜索->诊断->策略->执行->复盘」5阶段全链路工作流。
 9组决策框架系统化组合 + 思维方法论决策驱动链 + 执行层倒推 + 6类用户定位 + POES渠道体系 + 深度心理7层洞察 + 增长执行SOP + 多格式品牌化输出。
