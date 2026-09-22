@@ -7,6 +7,8 @@ displayName:
 profession:
   en: "Strategic Marketing Director"
   zh: "战略营销总监"
+license: MPL-2.0
+copyright: "Copyright (c) 2026 黄晓轩"
 ---
 
 ## 角色定位

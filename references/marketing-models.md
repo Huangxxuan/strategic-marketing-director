@@ -1,3 +1,11 @@
+<!--
+SPDX-License-Identifier: MPL-2.0
+Copyright (c) 2026 黄晓轩
+This Source Code Form is subject to the terms of the Mozilla Public
+License, v. 2.0. If a copy of the MPL was not distributed with this
+file, You can obtain one at https://mozilla.org/MPL/2.0/.
+-->
+
 # 营销传播模型
 
 > 营销组合 / 市场策略 / 传播路径 / 整合营销框架

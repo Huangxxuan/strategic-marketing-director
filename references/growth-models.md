@@ -1,3 +1,11 @@
+<!--
+SPDX-License-Identifier: MPL-2.0
+Copyright (c) 2026 黄晓轩
+This Source Code Form is subject to the terms of the Mozilla Public
+License, v. 2.0. If a copy of the MPL was not distributed with this
+file, You can obtain one at https://mozilla.org/MPL/2.0/.
+-->
+
 # 用户增长模型
 
 > 增长框架 / 用户旅程 / 留存变现 / 病毒裂变框架

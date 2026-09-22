@@ -8,8 +8,9 @@ description_en: "Strategic Marketing Director — an AI-powered marketing decisi
 category: 05-MarketingGrowth
 author:
   name: 黄晓轩
-  email: hello@xiaoxuan.studio
-license: MIT
+  email: xiaoxuan_zx@163.com
+license: MPL-2.0
+copyright: "Copyright (c) 2026 黄晓轩"
 metadata:
   created: 2026-04-24
   updated: 2026-08-10

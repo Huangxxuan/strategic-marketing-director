@@ -1,3 +1,11 @@
+<!--
+SPDX-License-Identifier: MPL-2.0
+Copyright (c) 2026 黄晓轩
+This Source Code Form is subject to the terms of the Mozilla Public
+License, v. 2.0. If a copy of the MPL was not distributed with this
+file, You can obtain one at https://mozilla.org/MPL/2.0/.
+-->
+
 # Changelog
 
 本文件记录 strategic-marketing-director skill 版本变更。
