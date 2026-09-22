@@ -126,6 +126,12 @@ strategic-marketing-director/
 ├── README.md               # 项目说明(本文件)
 ├── CHANGELOG.md            # 版本变更记录
 ├── LICENSE                 # MPL-2.0
+├── .codebuddy-plugin/      # WorkBuddy平台配置
+│   └── plugin.json         #   插件元数据+市场配置+依赖声明
+├── agents/                 # WorkBuddy Agent定义
+│   └── strategic-marketing-director.md
+├── avatars/                # WorkBuddy专家头像
+│   └── expert.svg
 ├── references/             # 16参考文档(9基础库+7扩展库)
 ├── templates/              # 5视觉风格HTML模板 + 总览页
 ├── evals/                  # 3测试用例(质量验证)
