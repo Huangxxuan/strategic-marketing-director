@@ -9,6 +9,11 @@
 ![Language](https://img.shields.io/badge/language-Markdown-lightgrey?style=flat-square)
 ![Dependencies](https://img.shields.io/badge/dependencies-0-green?style=flat-square)
 
+![9 Decision Frameworks](https://img.shields.io/badge/9_decision_frameworks-ffb347?style=flat-square&logo=mindmeister&logoColor=white)
+![210+ Mental Models](https://img.shields.io/badge/210%2B_mental_models-ff7e5f?style=flat-square&logo=bookstack&logoColor=white)
+![5-Phase Workflow](https://img.shields.io/badge/5--phase_workflow-ffb347?style=flat-square&logo=steps&logoColor=white)
+![GitHub Stars](https://img.shields.io/github/stars/Huangxxuan/strategic-marketing-director?style=flat-square&color=ffb347&logo=github)
+
 </div>
 
 ---
@@ -24,7 +29,7 @@
 
 -----
 
-<img width="2295" height="1279" alt="微信图片_20260522184204_348_118" src="https://github.com/user-attachments/assets/36011dce-0914-4259-a51c-e7e28c554e46" />
+<img width="2295" height="1279" alt="战略营销决策大脑架构图" src="https://github.com/user-attachments/assets/36011dce-0914-4259-a51c-e7e28c554e46" />
 
 -----
 
@@ -69,6 +74,29 @@
 
 ------
 
+## 9组决策框架（系统化组合）
+
+| # | 框架 | 适用场景 | 模型组合（调用顺序） |
+|---|------|---------|-------------------|
+| 1 | 战略环境扫描 | 进入新市场 / 宏观判断 | PESTEL → 五力 → 3C |
+| 2 | 品牌定位决策 | 新品牌 / 品牌升级 | 定位三角 → Kapferer → 价值主张 → PMM |
+| 3 | 营销组合策略 | 产品上市 / 营销规划 | STP → 4P → GTM → IMC |
+| 4 | 增长路径设计 | 用户增长 / 规模扩张 | 北极星 → AARRR → 飞轮 → Hook |
+| 5 | 用户洞察与转化 | 转化提升 / 体验优化 | CJM → BJ Fogg → KANO → 7层心理 |
+| 6 | 传播与渠道组合 | Campaign / 媒介投放 | AIDA → SOSTAC → POES 12渠道 → IMC |
+| 7 | 数据与效果评估 | ROI证明 / 效果归因 | LTV-CAC → RFM → HEART → A/B |
+| 8 | 运营与执行管控 | 项目落地 / 团队对齐 | OKR → RACI → PDCA → SOP |
+| 9 | 销售与变现 | 销售转化 / 定价 / 客户 | 销售漏斗 → MEDDIC → 定价 → 客户成功 |
+
+## 思维方法论驱动链
+
+8大思维模型从「孤立工具」升级为「决策驱动链」，每一模型驱动一个决策环节：
+
+```
+收敛主链：5W2H(界定) → MECE(拆解) → 因果图(根因) → 决策树(量化) → 六帽(审视) → 金字塔(表达) → SCQA(叙事)
+                                                                   ↑
+                                                           脑暴(发散补缺)
+```
 
 ### 启用与调用
 本 skill兼容主流 agent 框架(Claude Code / Trae CN / Workbuddy / openclaw / codex 等)。
@@ -95,11 +123,12 @@
 ```
 strategic-marketing-director/
 ├── SKILL.md                # 入口:能力中枢+路由
+├── README.md               # 项目说明(本文件)
 ├── CHANGELOG.md            # 版本变更记录
 ├── LICENSE                 # MPL-2.0
 ├── references/             # 16参考文档(9基础库+7扩展库)
 ├── templates/              # 5视觉风格HTML模板 + 总览页
-├── evals/                  # 3测试用例
+├── evals/                  # 3测试用例(质量验证)
 └── scripts/                # 脚本工具(预留)
 ```
 
@@ -107,20 +136,20 @@ strategic-marketing-director/
 
 -----
 
-<img width="2410" height="1688" alt="Xnip2026-08-11_22-59-53" src="https://github.com/user-attachments/assets/85ba1e27-3d25-4ba4-adef-600a34477585" />
+<img width="2410" height="1688" alt="5阶段工作流示意图" src="https://github.com/user-attachments/assets/85ba1e27-3d25-4ba4-adef-600a34477585" />
 
-<img width="2272" height="1542" alt="Xnip2026-08-11_23-00-07" src="https://github.com/user-attachments/assets/952304ef-344a-48bc-acb4-6644a283eb5c" />
+<img width="2272" height="1542" alt="9组决策框架示意图" src="https://github.com/user-attachments/assets/952304ef-344a-48bc-acb4-6644a283eb5c" />
 
 
 ## 5视觉风格HTML模板
 
-| 模板 | 风格 | 品牌色 |
-|---|---|---|
-| template-01-modernism.html | 现代主义(包豪斯) | #DA1F26 |
-| template-02-minimalism.html | 极简主义 | #FFD60A |
-| template-03-brutalism.html | 新野兽派 | #FF3D7F |
-| template-04-pixel-art.html | 像素风 | #39FF14 |
-| template-05-maximalism.html | 极繁主义 | #E91E63 |
+| 模板 | 风格 | 品牌色 | 调性匹配 |
+|---|---|---|---|
+| template-01-modernism.html | 现代主义(包豪斯) | #DA1F26 | 专业 / 高端 |
+| template-02-minimalism.html | 极简主义 | #FFD60A | 高端 / 专业 |
+| template-03-brutalism.html | 新野兽派 | #FF3D7F | 活力 |
+| template-04-pixel-art.html | 像素风 | #39FF14 | 活力 / 科技 |
+| template-05-maximalism.html | 极繁主义 | #E91E63 | 活力 |
 
 零依赖单文件,统一8 slides + 13占位符schema + seen类滚动翻页 + 响应式打印。
 
@@ -182,6 +211,7 @@ strategic-marketing-director/
 - 创建日期:2026-04-24
 - 更新日期:2026-08-10
 - 模型数量:210+心智模型,9组决策框架
+- 仓库:https://github.com/Huangxxuan/strategic-marketing-director
 
 ## 许可证
 

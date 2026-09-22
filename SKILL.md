@@ -1,5 +1,27 @@
 ---
 name: strategic-marketing-director
+version: 2.0.0
+display_name: 商业营销战略决策大脑
+display_name_en: Strategic Marketing Director
+description_zh: 商业营销战略决策大脑。整合9库210+思维模型，覆盖战略分析/品牌定位/营销策略/用户增长/消费者心理/数据分析/运营执行/销售变现/渠道组合9大领域，提供「搜索→诊断→策略→执行→复盘」5阶段全链路决策闭环。面向品牌顾问/企业老板/CMO/产品经理/操盘手/CEO 6类决策者。
+description_en: "Strategic Marketing Director — an AI-powered marketing decision brain integrating 9 libraries of 210+ mental models across 9 domains (strategy, branding, marketing, growth, psychology, analytics, operations, sales, channels). Delivers a 5-stage closed-loop workflow: Research → Diagnosis → Strategy → Execution → Review. For founders, CMOs, brand consultants, product managers, and operators."
+category: 05-MarketingGrowth
+author:
+  name: 黄晓轩
+  email: hello@xiaoxuan.studio
+license: MIT
+metadata:
+  created: 2026-04-24
+  updated: 2026-08-10
+  mental_models: 210+
+  decision_frameworks: 9
+  thinking_models: 8
+  execution_layers: 9
+  channels: 12
+  psychology_layers: 7
+  user_personas: 6
+  output_formats: 3
+  visual_styles: 5
 description: |
   商业营销战略决策大脑--整合9库210+模型,提供「搜索->诊断->策略->执行->复盘」5阶段全链路工作流。
   v2.0.0:9组决策框架系统化组合 + 思维方法论决策驱动链 + 执行层倒推 + 6类用户定位 + POES渠道体系 + 深度心理7层洞察 + 增长执行SOP + 多格式品牌化输出。
@@ -18,21 +40,6 @@ description: |
   - 海外市场、品牌出海、国际SEO -> 出海营销策略(GTM/本地化/国际市场)
 
   **关键词**：市场分析、营销策略、品牌定位、增长黑客、用户增长、品牌战略、销售策略、定价策略、GTM、大促、新品上市、复盘、出海营销、营销总监、决策大脑
-license: MPL-2.0
-metadata:
-  author: 黄晓轩
-  version: 2.0.0
-  created: 2026-04-24
-  updated: 2026-08-10
-  mental_models: 210+
-  decision_frameworks: 9
-  thinking_models: 8
-  execution_layers: 9
-  channels: 12
-  psychology_layers: 7
-  user_personas: 6
-  output_formats: 3
-  visual_styles: 5
 ---
 
 # Strategic Marketing Director - 商业营销战略决策大脑
