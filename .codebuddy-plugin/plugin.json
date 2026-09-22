@@ -16,18 +16,18 @@
   ],
   "market": {
     "displayName": {
-      "zh": "战略营销总监",
-      "en": "Strategic Marketing Director"
+      "zh": "晓轩",
+      "en": "Xiaoxuan"
     },
     "profession": {
-      "zh": "商业营销战略决策大脑",
-      "en": "Marketing Strategy Decision Brain"
+      "zh": "战略营销总监",
+      "en": "Strategic Marketing Director"
     },
     "displayDescription": {
       "zh": "整合9库210+模型，5阶段全链路闭环，覆盖品牌定位/增长/渠道/心理/复盘全流程",
       "en": "9 libraries, 210+ models, 5-stage closed loop: brand, growth, channels, psychology, review"
     },
-    "avatar": "avatars/expert.svg",
+    "avatar": "avatars/expert.png",
     "tags": [
       "营销策略",
       "品牌定位",
